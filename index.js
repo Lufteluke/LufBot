@@ -1,3 +1,4 @@
+var port = process.env.PORT || 3000;
 var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
@@ -41,7 +42,7 @@ function analyseText (message) {
   textMessage = message.text.toLowerCase();
 
   if (msgMatch('*')) {
-    return '0w0     ${textMessage} the absolute fuck out of (*•.¸${message.from.first_name}¸.•*) right back~~~~~'
+    return '0w0 ' + textMessage + ' the absolute fuck out of (*•.¸' + message.from.first_name + '¸.•*) right back~~~~~' //todo more
   }
 
   else if (msgMatch('shrug')) {
@@ -86,11 +87,11 @@ function analyseText (message) {
   }
 
   else if (msgMatch('love')) {
-    return 'I love ${message.from.first_name} ! ...on the inside anyway'
+    return 'I love ' + message.from.first_name + '! ...on the inside anyway'
   }
 
   else if (msgMatch('good bot')) {
-    return 'Likewise, ${message.from.first_name} you\'d make an excellent automaton'
+    return 'Likewise, ' + message.from.first_name + ' you\'d make an excellent automaton'
   }
 
   else if (msgMatch('knock knock')) {
@@ -98,7 +99,7 @@ function analyseText (message) {
   }
 
   else if (msgMatch('who dares')) {
-    return 'It\'s me, the Bot of Wisdom. I dispense wisdom from my mighty wisdom stack'
+    return 'It\'s me, the ' + message.to.first_name + '. I dispense wisdom from my mighty wisdom stack'
   }
 
   else if (msgMatch('wisdom')) {
@@ -178,6 +179,6 @@ function postString (reply, message, res) {
 }
 
 //server start
-app.listen(3000, function() {
-  console.log('LufBot listening on 3000!')
+app.listen(port, function() {
+  console.log('LufBot listening on port ' + port)
 })
