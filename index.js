@@ -4,24 +4,19 @@ var app = express()
 var bodyParser = require('body-parser')
 const axios = require('axios')
 const apiUrl = "https://api.telegram.org/bot788833207:AAHoFcJiwav5bKMuY5SUmYA5XVRfDPIRSdk"
-
-const facts = ['Foxyfluffs are dust on the floor',
-  'You will die alone and afraid.',
-  'Error warning etc etc']
-
-const conspiracyJet = ['Jet ', 'Melting ', 'Steel ', 'Beam ', 'Stealing ']
-const conspiracyFuel = ['fuel ', 'steel ', 'beams ']
-//can't
-const conspiracyMelt = ['melt ', 'fuel ', 'steal ', 'beam ']
-const conspiracySteel = ['steel ', 'jet ', 'beam ', 'molten ']
-const conspiracyBeams = ['beams!', 'jets!', 'fuel!', 'steel!']
-
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
     extended: true
   })
 )
+
+
+const facts = ['Foxyfluffs are dust on the floor',
+  'You will die alone and afraid.',
+  'Error warning etc etc']
+
+const conspiracy = [['Jet ', 'Melting ', 'Steel ', 'Beam ', 'Stealing '],     ['fuel ', 'steel ', 'beams '],     ['melt ', 'fuel ', 'steal ', 'beam '],     ['steel ', 'jet ', 'beam ', 'molten '],     ['beams!', 'jets!', 'fuel!', 'steel!']]
 
 app.post('/new-message', function(req, res) {
   
@@ -41,7 +36,7 @@ app.post('/new-message', function(req, res) {
 function analyseText (message) {
   textMessage = message.text.toLowerCase();
 
-  if (msgMatch('*')) {
+  if (msgMatcInOrder(['*', '*'])) {
     return '0w0 ' + textMessage + ' the absolute fuck out of (*•.¸' + message.from.first_name + '¸.•*) right back~~~~~' //todo more
   }
 
@@ -107,7 +102,7 @@ function analyseText (message) {
   }
 
   else if (msgMatch('conspiracy')) {
-    return pickRandom(conspiracyJet) +  pickRandom(conspiracyFuel) + 'can\'t ' + pickRandom(conspiracyMelt) + pickRandom(conspiracySteel) + pickRandom(conspiracyBeams)
+    return pickRandom(conspiracy[0]) +  pickRandom(conspiracy[1]) + 'can\'t ' + pickRandom(conspiracy[2]) + pickRandom(conspiracy[3]) + pickRandom(conspiracy[4])
   }
   
   else if (msgMatch('fact')){
@@ -115,12 +110,7 @@ function analyseText (message) {
   }
 
   //greetings
-  else if (msgMatch('hi')  ||
-  msgMatch('hello')        ||
-  msgMatch('howdy')        ||
-  msgMatch('hai')          ||
-  msgMatch('hey')          
-  ){
+  else if (msgMatchAny(['hi', 'hello', 'howdy', 'hai', 'hey', 'yo'])){
     return 'Hello, ' + message.from.first_name + ', how are you?'
   }  
 
@@ -132,10 +122,30 @@ function analyseText (message) {
 
   //Textmatching
   function msgMatch (to) {
-    return (textMessage.indexOf(to) >= 0)
+    return (textMessage.includes(to))
   }
 
-  //Ordered textmatching
+  //Match any of input
+  function msgMatchAny (array) {
+    array.forEach(element => {
+      if (textMessage.indexOf(to) >= 0){
+        return true
+      }
+    });
+    return false;
+  }
+
+  //Match all of the input
+  function msgMatchAny (array) {
+    array.forEach(element => {
+      if (textMessage.indexOf(to) == -1){
+        return false
+      }
+    });
+    return true;
+  }
+
+  //Match in order
   function msgMatcInOrder (array) { 
     var index = -1
     var current = -1
