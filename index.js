@@ -127,12 +127,13 @@ function analyseText (message) {
 
   //Match any of input
   function msgMatchAny (array) {
+    var conditionMet = false;
     array.forEach(element => {
       if (textMessage.includes(element)){
-        return true
+        conditionMet = true
       }
     });
-    return false
+    return (conditionMet || array.length == 0)
   }
 
   //Match all of the input
@@ -149,15 +150,16 @@ function analyseText (message) {
   function msgMatcInOrder (array) { 
     var index = -1
     var current = -1
+    var conditionMet = true
 
     array.forEach(element => {
       current = textMessage.indexOf(element, (index + 1))
       if (current == -1){
-        return false
+        conditionMet = false
       }
       index = current
     });
-    return true
+    return conditionMet
   }
 
 
