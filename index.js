@@ -26,7 +26,7 @@ app.post('/new-message', function(req, res) {
     return res.end()
   }
 
-  var reply = analyseText(message);
+  var reply = analyseText(message)
   postString(reply, message, res)  
 })
 
@@ -34,9 +34,9 @@ app.post('/new-message', function(req, res) {
 
 //CREATE MESSAGE
 function analyseText (message) {
-  textMessage = message.text.toLowerCase();
+  textMessage = message.text.toLowerCase()
 
-  if (msgMatcInOrder(['*', '*'])) {
+  if (msgMatcInOrder(['horse', 'potatoes'])) {
     return '0w0 ' + textMessage + ' the absolute fuck out of (*•.¸' + message.from.first_name + '¸.•*) right back~~~~~' //todo more
   }
 
@@ -122,7 +122,7 @@ function analyseText (message) {
 
   //Textmatching
   function msgMatch (to) {
-    return (textMessage.indexOf(element) >= 0)
+    return (textMessage.indexOf(to) >= 0)
   }
 
   //Match any of input
@@ -132,7 +132,7 @@ function analyseText (message) {
         return true
       }
     });
-    return false;
+    return false
   }
 
   //Match all of the input
@@ -142,7 +142,7 @@ function analyseText (message) {
         return false
       }
     });
-    return true;
+    return true
   }
 
   //Match in order
@@ -153,12 +153,11 @@ function analyseText (message) {
     array.forEach(element => {
       current = textMessage.indexOf(element, (index + 1))
       if (current == -1){
-        return false;
+        return false
       }
-      index = current;
+      index = current
     });
-
-    return (true)
+    return true
   }
 
 
