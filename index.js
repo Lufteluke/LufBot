@@ -12,12 +12,11 @@ app.use(
 )
 
 
-const facts = ['Foxyfluffs are dust on the floor',
-  'You will die alone and afraid.',
-  'Error warning etc etc']
-
+const facts = ['Foxyfluffs are dust on the floor', 'You will die alone and afraid.', 'Error warning etc etc']
 const conspiracy = [['Jet ', 'Melting ', 'Steel ', 'Beam ', 'Stealing '],     ['fuel ', 'steel ', 'beams '],     ['melt ', 'fuel ', 'steal ', 'beam '],     ['steel ', 'jet ', 'beam ', 'molten '],     ['beams!', 'jets!', 'fuel!', 'steel!']]
-
+const eightball = ['It is certain', 'It is decidedly so', 'Without a doubt', 'Yes - definitely', 'You may rely on it', 'As I see it, yes', 'Most likely', 'Outlook good', 'Yes', 'Signs point to yes', 'Reply hazy, try again', 'Ask again later', 'Better not tell you now', 'Cannot predict now', 'Concentrate and ask again', 'Don\'t count on it', 'My reply is no', 'My sources say no', 'Outlook not so good','Very doubtful', 'Go fuck yourself', 'Fuck a duck']
+const yesNoWords = ['am', 'are', 'is', 'was', 'were',    'will' + 'would',    'can', 'could',     'shall', 'should']
+const otherQuestions = ['who', 'what', 'when', 'where', 'why', 'which']
 app.post('/new-message', function(req, res) {
   
   const {message} = req.body
@@ -36,8 +35,12 @@ app.post('/new-message', function(req, res) {
 function analyseText (message) {
   textMessage = message.text.toLowerCase()
 
-  if (msgMatcInOrder(['horse', 'potatoes'])) {
-    return '0w0 ' + textMessage + ' the absolute fuck out of (*•.¸' + message.from.first_name + '¸.•*) right back~~~~~' //todo more
+  if (msgMatcInOrder(['*', '*'])) {
+    return '0w0 ' + textMessage + ' all over ' + message.from.first_name //todo more
+  }
+
+  else if (msgMatch('?') && msgMatchAny(yesNoWords)) {
+    return pickRandom(eightball)
   }
 
   else if (msgMatch('shrug')) {
@@ -52,7 +55,6 @@ function analyseText (message) {
     else if (msgMatch('boop beep')) {
       return 'beep boop' 
     }
-    
     return 'boop' 
   }
 
@@ -122,14 +124,14 @@ function analyseText (message) {
 
   //Textmatching
   function msgMatch (to) {
-    return (textMessage.indexOf(to) >= 0)
+    return (textMessage.includes(to))
   }
 
   //Match any of input
   function msgMatchAny (array) {
     var conditionMet = false;
     array.forEach(element => {
-      if (textMessage.includes(element)){
+      if (msgMatch (element)){
         conditionMet = true
       }
     });
@@ -139,7 +141,7 @@ function analyseText (message) {
   //Match all of the input
   function msgMatchAll (array) {
     array.forEach(element => {
-      if (!textMessage.includes(element)){
+      if (!msgMatch (element)){
         return false
       }
     });
