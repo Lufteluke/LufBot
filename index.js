@@ -25,7 +25,7 @@ app.use(
 
 app.post('/new-message', function(req, res) {
   
-  const message = req.body.message
+  const {message} = req.body
 
   if (!message || !message.text) {
     return res.end()
