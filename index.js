@@ -20,7 +20,7 @@ const conspiracy = [['Jet ', 'Melting ', 'Steel ', 'Beam ', 'Stealing '],     ['
 
 app.post('/new-message', function(req, res) {
   
-  const message = req.body.message //const {message} = req.body
+  const {message} = req.body
 
   if (!message || !message.text) {
     return res.end()
@@ -122,13 +122,13 @@ function analyseText (message) {
 
   //Textmatching
   function msgMatch (to) {
-    return (textMessage.includes(to))
+    return (textMessage.indexOf(element) >= 0)
   }
 
   //Match any of input
   function msgMatchAny (array) {
     array.forEach(element => {
-      if (textMessage.indexOf(to) >= 0){
+      if (textMessage.includes(element)){
         return true
       }
     });
@@ -138,7 +138,7 @@ function analyseText (message) {
   //Match all of the input
   function msgMatchAll (array) {
     array.forEach(element => {
-      if (textMessage.indexOf(to) == -1){
+      if (!textMessage.includes(element)){
         return false
       }
     });
@@ -149,15 +149,16 @@ function analyseText (message) {
   function msgMatcInOrder (array) { 
     var index = -1
     var current = -1
+
     array.forEach(element => {
-      current = textMessage.indexOf(element (index + 1))
+      current = textMessage.indexOf(element, (index + 1))
       if (current == -1){
         return false;
       }
       index = current;
     });
 
-    return (textMessage.contains(to))
+    return (true)
   }
 
 
