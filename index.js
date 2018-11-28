@@ -20,7 +20,7 @@ const conspiracy = [['Jet ', 'Melting ', 'Steel ', 'Beam ', 'Stealing '],     ['
 
 app.post('/new-message', function(req, res) {
   
-  const {message} = req.body
+  const message = req.body.message //const {message} = req.body
 
   if (!message || !message.text) {
     return res.end()
@@ -136,7 +136,7 @@ function analyseText (message) {
   }
 
   //Match all of the input
-  function msgMatchAny (array) {
+  function msgMatchAll (array) {
     array.forEach(element => {
       if (textMessage.indexOf(to) == -1){
         return false

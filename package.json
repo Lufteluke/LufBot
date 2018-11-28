@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "Bot for telegramgram",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"I will not be tested\" && exit 1",
-    "start" : "node index.js"
-  },
+  
   
   "author": "Simon Østrem <admin@corrupted.systems> (https://corrupted.systems)",
   "license": "ISC",
@@ -19,5 +16,10 @@
 
   "engines": {
     "node":"8.11.1"
+  },
+  
+  "scripts": {
+    "test": "echo \"I will not be tested\" && exit 1",
+    "start" : "node index.js"
   }
 }
