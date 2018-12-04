@@ -5,7 +5,7 @@ const axios = require('axios')
 
 var port = process.env.PORT || 3000;
 const telegramApiKey = process.env.TELEGRAM_API_KEY || 'bot123456789:ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-const apiUrl = 'https://api.telegram.org/' + telegramApiKey
+const apiUrl = 'https://api.telegram.org/bot' + telegramApiKey
 
 app.use(bodyParser.json())
 app.use(
@@ -14,20 +14,22 @@ app.use(
   })
 )
 
-
 const facts = ['Foxyfluffs are dust on the floor', 'You will die alone and afraid.', 'Error warning etc etc']
 const conspiracy = [['Jet ', 'Melting ', 'Steel ', 'Beam ', 'Stealing '],     ['fuel ', 'steel ', 'beams '],     ['melt ', 'fuel ', 'steal ', 'beam '],     ['steel ', 'jet ', 'beam ', 'molten '],     ['beams!', 'jets!', 'fuel!', 'steel!']]
 const eightball = ['It is certain', 'It is decidedly so', 'Without a doubt', 'Yes - definitely', 'You may rely on it', 'As I see it, yes', 'Most likely', 'Outlook good', 'Yes', 'Signs point to yes', 'Reply hazy, try again', 'Ask again later', 'Better not tell you now', 'Cannot predict now', 'Concentrate and ask again', 'Don\'t count on it', 'My reply is no', 'My sources say no', 'Outlook not so good','Very doubtful', 'Go fuck yourself', 'Fuck a duck']
 const yesNoWords = ['am', 'are', 'is', 'was', 'were',    'will' + 'would',    'can', 'could',     'shall', 'should',    'do', 'did', 'done', 'does',    'has', 'had', 'have']
 const otherQuestions = ['who', 'what', 'when', 'where', 'why', 'which']
+
 app.post('/new-message', function(req, res) {
-  
   const {message} = req.body
 
+  console.log('Msg get!')
+
   if (!message || !message.text) {
+    console.log('Abort')
     return res.end()
   }
-
+  console.log('Msg from: ' + message.from.first_name)
   var reply = analyseText(message)
   postString(reply, message, res)  
 })
@@ -36,14 +38,39 @@ app.post('/new-message', function(req, res) {
 
 //CREATE MESSAGE
 function analyseText (message) {
-  textMessage = message.text.toLowerCase()
+  textMessage = message.text.toLowerCase().replace('/talk', '')
+  const {first_name} = message.from
+  console.log('Analyse msg: ' + textMessage)
 
-  if (msgMatcInOrder(['*', '*'])) {
-    return '0w0 ' + textMessage + ' all over ' + message.from.first_name //todo more
+  if (msgMatchInOrder(['*', '*'])) {
+    if (msgMatch('you')){
+      return textMessage + ' back!~'
+    }
+    else if (msgMatch('lufbot')) {
+      return textMessage.replace('lufbot', first_name)
+    }
+    else {
+      return '0w0 ' + textMessage + ' all over ' + first_name 
+    }
+    
   }
 
-  else if (msgMatch('?') && msgMatchAny(yesNoWords)) {
-    return pickRandom(eightball)
+  else if (msgMatch('?')) {
+
+    if (msgMatchAny(yesNoWords)) {
+      return pickRandom(eightball)
+    } 
+
+    else if (msgMatchInOrder(['chat', 'id'])) {
+      return 'Our lovely chat has the ID: ' + message.chat.id
+    }
+    else {
+      return 'I donut understand the question'
+    }
+  }
+
+  else if (msgMatchAny(['owo', '0w0'])) {
+    return textMessage.replace('l', 'w').replace('r', 'w')
   }
 
   else if (msgMatch('shrug')) {
@@ -122,6 +149,7 @@ function analyseText (message) {
   else if (msgMatch('about')) {
     return "LufBot V0.1 at your service. I was made to confuse" 
   }
+
   //default
   return "Please be autism, I have patience"
 
@@ -138,7 +166,7 @@ function analyseText (message) {
         conditionMet = true
       }
     });
-    return (conditionMet || array.length == 0)
+    return (conditionMet || array.length === 0)
   }
 
   //Match all of the input
@@ -152,7 +180,7 @@ function analyseText (message) {
   }
 
   //Match in order
-  function msgMatcInOrder (array) { 
+  function msgMatchInOrder (array) { 
     var index = -1
     var current = -1
     var conditionMet = true
