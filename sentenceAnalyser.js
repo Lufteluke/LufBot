@@ -6,7 +6,7 @@ module.exports.parse = function (message) {
   const text = message.text.toLowerCase().replace('/talk', '')  
   const {first_name} = message.from
 
-  if (h.msgMatchInOrder(['*', '*'])) {
+  if (h.msgMatchInOrder(text, ['*', '*'])) {
     if (h.msgMatch(text, 'you')){
       return text + ' back!~'
     }

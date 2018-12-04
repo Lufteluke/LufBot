@@ -10,7 +10,7 @@ module.exports.msgMatchWord = function (message, match) {//TODO
 module.exports.msgMatchAny = function (message, array) {
     var conditionMet = false;
     array.forEach(element => {
-        if (msgMatch (message, element)){
+        if (exports.msgMatch (message, element)){
         conditionMet = true
         }
     });
@@ -20,7 +20,7 @@ module.exports.msgMatchAny = function (message, array) {
 //Match all of the input
 module.exports.msgMatchAll = function (message, array) {
     array.forEach(element => {
-        if (!msgMatch (message, element)){
+        if (!exports.msgMatch (message, element)){
         return false
         }
     });
