@@ -1,9 +1,12 @@
-var port = process.env.PORT || 3000;
 var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
 const axios = require('axios')
-const apiUrl = "https://api.telegram.org/bot788833207:AAHoFcJiwav5bKMuY5SUmYA5XVRfDPIRSdk"
+
+var port = process.env.PORT || 3000;
+const telegramApiKey = process.env.TELEGRAM_API_KEY || 'bot123456789:ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const apiUrl = 'https://api.telegram.org/' + telegramApiKey
+
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
