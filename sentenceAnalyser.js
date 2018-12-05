@@ -25,8 +25,7 @@ module.exports.parse = function (message) {
       return h.pickRandom(l.eightball)
     }
 
-    else if (h.msgMatch(text, 'who')) {
-
+    else if (h.msgMatch(text, '/who')) {
       return text.replace('/who', h.pickRandom(l.subjects.concat(first_name))).replace('?', '!')
     }
 
