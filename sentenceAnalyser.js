@@ -25,13 +25,7 @@ module.exports.parse = function (message) {
     }
 
     else if (h.msgMatch(text, 'who')) {
-      if (h.msgMatchAny(text, ['did', 'done'])) {
-        var option = Math.floor(Math.random() * 10)
-        if (option == 5) {
-          return first_name + ' did it!'
-        }
-        return h.pickRandom(l.subjects) + ' did it!' //appends
-      }
+      return h.pickRandom(l.subjects.concat(first_name)) + '!'
     }
 
     else if (h.msgMatchInOrder(text, ['chat', 'id'])) {
