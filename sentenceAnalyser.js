@@ -22,7 +22,17 @@ module.exports.parse = function (message) {
 
     if (h.msgMatchAny(text, l.eightball)) {
       return h.pickRandom(l.eightball)
-    } 
+    }
+
+    else if (h.msgMatch(text, 'who')) {
+      if (h.msgMatchAny(text, ['did', 'done'])) {
+        var option = Math.floor(Math.random() * 10)
+        if (option == 5) {
+          return first_name + ' did it!'
+        }
+        return l.subjects + ' did it!'
+      }
+    }
 
     else if (h.msgMatchInOrder(text, ['chat', 'id'])) {
       return 'Our lovely chat has the ID: ' + message.chat.id
@@ -77,11 +87,11 @@ module.exports.parse = function (message) {
   }
 
   else if (h.msgMatch(text, 'love')) {
-    return 'I love ' + message.from.first_name + '! ...on the inside anyway'
+    return 'I love ' + first_name + '! ...on the inside anyway'
   }
 
   else if (h.msgMatch(text, 'good bot')) {
-    return 'Likewise, ' + message.from.first_name + ' you\'d make an excellent automaton'
+    return 'Likewise, ' + first_name + ' you\'d make an excellent automaton'
   }
 
   else if (h.msgMatch(text, 'knock knock')) {
@@ -89,7 +99,7 @@ module.exports.parse = function (message) {
   }
 
   else if (h.msgMatch(text, 'who dares')) {
-    return 'It\'s me, the ' + message.to.first_name + '. I dispense wisdom from my mighty wisdom stack'
+    return 'It\'s me, the ' + first_name + '. I dispense wisdom from my mighty wisdom stack'
   }
 
   else if (h.msgMatch(text, 'wisdom')) {
@@ -111,7 +121,7 @@ module.exports.parse = function (message) {
 
   //greetings
   else if (h.msgMatchAny(text, l.greetings)){
-    return 'Hello, ' + message.from.first_name + ', how are you?'
+    return 'Hello, ' + first_name + ', how are you?'
   }  
 
   else if (h.msgMatch(text, 'about')) {
