@@ -26,7 +26,7 @@ module.exports.parse = function (message) {
     }
 
     else if (h.msgMatch(text, 'who')) {
-      const mod = '';
+      var mod = '';
       if (split.length >= 1) mod = ' ' + split[1]
       if (split.length >= 2) mod = mod + ' ' + split[2]
       return h.pickRandom(l.subjects.concat(first_name)) + mod + '!';
