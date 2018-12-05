@@ -25,7 +25,7 @@ module.exports.parse = function (message) {
     }
 
     else if (h.msgMatch(text, 'who')) {
-      return h.pickRandom(l.subjects.concat(first_name)) + '!'
+      return h.pickRandom(l.subjects.concat(first_name)) + ' ' + text.split(' ')[1] + '!'
     }
 
     else if (h.msgMatchInOrder(text, ['chat', 'id'])) {
