@@ -30,7 +30,7 @@ module.exports.parse = function (message) {
         if (option == 5) {
           return first_name + ' did it!'
         }
-        return l.subjects + ' did it!'
+        return h.pickRandom(l.subjects) + ' did it!' //appends
       }
     }
 
