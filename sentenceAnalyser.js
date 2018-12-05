@@ -5,6 +5,7 @@ module.exports.parse = function (message) {
 
   const text = message.text.toLowerCase().replace('/talk', '')  
   const {first_name} = message.from
+  const split  = text.split(' ')
 
   if (h.msgMatchInOrder(text, ['*', '*'])) {
     if (h.msgMatch(text, 'you')){
@@ -25,7 +26,10 @@ module.exports.parse = function (message) {
     }
 
     else if (h.msgMatch(text, 'who')) {
-      return h.pickRandom(l.subjects.concat(first_name)) + ' ' + text.split(' ')[1] + '!'
+      const mod = '';
+      if (split.length >= 1) mod = ' ' + split[1]
+      if (split.length >= 2) mod = mod + ' ' + split[2]
+      return h.pickRandom(l.subjects.concat(first_name)) + mod + '!';
     }
 
     else if (h.msgMatchInOrder(text, ['chat', 'id'])) {
