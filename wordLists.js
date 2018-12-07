@@ -51,19 +51,56 @@ module.exports.names = ['bot', 'lufbot']
 
 module.exports.subjects = [
     //Conspiracy
-    'aliens', 'chemtrails', 'illuminati', 'gay frogs', 'the military industrial complex', 'I don\'t know who',  'the porn industry', 'violent videogames', 'the greys', 'lizard people', 'the deep state', 'rock music',
+    'aliens', 'chemtrails', 'illuminati', 'gay frogs', 'the military industrial complex', 'I don\'t know who',
+    'the porn industry', 'violent videogames', 'the greys', 'lizard people', 'the deep state', 'rock music',
     //Communities
-    'Tumblr', 'Twitter', 'deviantArt', 'FurAffinity', 'the internet', 'furries', 'bronies', '4chan', 'e621', 'Pinterest', 'hippies',
+    'Tumblr', 'Twitter', 'deviantArt', 'FurAffinity', 'the internet', 'furries', 'bronies', '4chan', 'e621',
+    'Pinterest', 'hippies',
     //Political
-    'communism', 'capitalism', 'feminists', 'the government', 'BLM', 'MLMs', 'the Russians', 'the Chinese', 'the Mexicans', 'the Vikings', 'the artist formally known as ISIS',
+    'communism', 'capitalism', 'feminists', 'the government', 'BLM', 'MLMs', 'the Russians', 'the Chinese',
+    'the Mexicans', 'the Vikings', 'the artist formally known as ISIS',
     //Age
     'millenials', 'generation Y', 'generation X', 'generation Z', 'baby boomers',
     //Religious
     'the jews', 'scientologists', 'catholics', 'protestants', 'science', 'the spanish inquisition',
     //People
-    'Steven Seagal', 'Obama', 'Hitler', 'Santa', 'that hot guy at school', 'that hot girl at school', 'Satan', 'LufBot', 'Todd Howard', 'your mom', 'you', 'Garfield', 'Jehova', 'Jesus', 'ShoeOnHead', 'I',
+    'Steven Seagal', 'Obama', 'Hitler', 'Santa', 'that hot guy at school', 'that hot girl at school', 'Satan',
+    'LufBot', 'Todd Howard', 'your mom', 'you', 'Garfield', 'Jehova', 'Jesus', 'ShoeOnHead', 'I',
     //Other
     'mondays', 'egg', 'horses', 'the birds', 'Foxyfluffs', 'no-one', 'everyone'
+]
+
+module.exports.activities = [
+    //discorvery
+    'invented', 'disovered', 'made', 'shat out', 'improved',
+    //destructive
+    'cut up', 'detonated', 'destroyed', 'ate',
+    //state
+    'lived in', 'imagined', 'was', 'was made of'
+]
+
+module.exports.objects = [ //add all subjects
+    //year
+    '1944',
+    //places
+    'Earth', 'the Moon', 'Mars', 'America', 'space', 'black holes', 'Poland', 'Norway', 'Iceland', 'Britain',
+    //things
+    'Garbage', 'movies', 'the camera', 'furry porn',
+    //life
+    'life', 'humans', 'animals', 'foxes', 'death',
+    //food
+    'waffles', 'pizza'
+]
+
+module.exports.modifiers = [
+    //adverb
+    'intensively', ',but not really', '. Yes, really',
+    //while
+    'while drunk', 'while on drugs', 'while standing on one leg',
+    //time
+    'really fast', 'all the time', 'forever', 'since 1992', 'since before you were born', 'yesterday',
+    //place
+    'inside', 'outside'
 ]
 
 module.exports.iDontUnderstand = [

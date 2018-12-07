@@ -64,7 +64,15 @@ module.exports.conspiracy = function (){
 }
 
 module.exports.fact = function (){
-    return h.pickRandom(l.facts) //combine with people
+    return exports.randomFact()
+    //return h.pickRandom(l.facts)
+}
+
+module.exports.randomFact = function(from) {
+    return [h.pickRandom(l.subjects),
+        h.pickRandom(l.activities),
+        h.pickRandom(l.objects),
+        h.pickRandom(l.modifiers)].join(' ')
 }
 
 module.exports.about = function (from) {
