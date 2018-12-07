@@ -13,51 +13,60 @@ module.exports.parse = function (message) {
   const command = clean[0].toLowerCase()
   const split  = clean.split(' ')
 
-  return "Out of order"
+  //return "Out of order"
 
   if (h.matchWordFromList(command, c.commands)) {
     clean = clean.replace(command, '')
 
     switch (command) {
       case '/talk':
-        noCommand();
+      return command  +1
+        //return noCommand();
         break;
       
       case '/owo':
-        r.owo(clean)
+      return command  +2
+      //return r.owo(clean)
         break;
       
       case '/eight':
+      return command  +3
         break;
       
       case '/music':
+      return command  +4
         break;
       
       case '/conspiracy':
+      return command  +5
         break;
       
       case '/fact':
+      return command  +6
         break;
       
       case '/help':
+      return command  +7
         break;
       
       case '/about':
+      return command  +8
         break;
 
       default:
-        noCommand()
+      return command  +9
+        //noCommand()
         break;
     }    
   }
   else {
-    noCommand();
+    return noCommand();
   }
 
   function noCommand() {
 
     if (h.msgMatch(clean, '?')) {
-      question()
+      return question()
     }
 
     if (h.msgMatchInOrder(clean, c.action)) {
