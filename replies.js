@@ -20,3 +20,7 @@ module.exports.asteriskAction = function (clean, from) { //todo get only center
 module.exports.owo = function (clean){
     return clean.split('l').join('w').split('r').join('w')
 }
+
+module.exports.default = function (from) {
+    return h.pickRandom((l.iDontUnderstand) + ', ' + from)
+}
