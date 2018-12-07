@@ -86,7 +86,7 @@ module.exports.good = function (from) {
 }
 
 module.exports.bad = function (from) {
-    return "I'm sorry, but you're pretty " + h.pickRandom(l.good) + ' yourself, ' + from
+    return "I'm sorry, but you're pretty " + h.pickRandom(l.bad) + ' yourself, ' + from
 }
 
 module.exports.help = function () {
