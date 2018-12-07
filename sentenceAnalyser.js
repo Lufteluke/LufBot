@@ -13,6 +13,8 @@ module.exports.parse = function (message) {
   const command = clean[0].toLowerCase()
   const split  = clean.split(' ')
 
+  return "Out of order"
+
   if (h.matchWordFromList(command, c.commands)) {
     clean = clean.replace(command, '')
 
