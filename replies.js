@@ -22,5 +22,5 @@ module.exports.owo = function (clean){
 }
 
 module.exports.default = function (from) {
-    return h.pickRandom((l.iDontUnderstand) + ', ' + from)
+    return h.pickRandom(l.iDontUnderstand) + '. Forgive me ' + from
 }

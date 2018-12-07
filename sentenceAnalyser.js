@@ -20,11 +20,11 @@ module.exports.parse = function (message) {
     clean = clean.replace(command, '')
 
     switch (command) {
-      case '/talk':
-      return r.default();
+      case '/owo':
+      return r.default(first_name);
       //return noCommand();
       
-      case '/owo':
+      case '/talk':
       return command  +2;
       //return r.owo(clean)
       
