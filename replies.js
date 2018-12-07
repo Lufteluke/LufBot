@@ -26,11 +26,11 @@ module.exports.default = function (from) {
 }
 
 module.exports.who = function (clean, from ) {
-    const replaceTxt = h.pickRandom(l.subjects.concat(from))
+    const doer = h.pickRandom(l.subjects.concat(from))
     if (!h.matchWord('who')) {
-        return replaceTxt + clean.replace('?', '!')
+        return doer + clean.replace('?', '!')
     }
-    else return clean.replace('who', replaceTxt).replace('?', '!')
+    else return clean.replace('who', doer).replace('?', '!')
 }
 
 module.exports.beep = function (clean) {
