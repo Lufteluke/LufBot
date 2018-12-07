@@ -48,7 +48,7 @@ module.exports.parser = function (message) {
       return r.fact(first_name);
       
       case '/help':
-      return c.commands;
+      return r.help();
       
       case '/about':
       return r.about(from);

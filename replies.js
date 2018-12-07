@@ -1,5 +1,7 @@
-const h = require('./helpers')
 const l = require('./wordLists')
+const h = require('./helpers')
+const r = require('./replies')
+const c = require('./commands')
 
 module.exports.asteriskAction = function (clean, from) { //todo get only center
     clean.replace(/\*/, '')
@@ -77,4 +79,11 @@ module.exports.randomFact = function(from) {
 
 module.exports.about = function (from) {
     return "LufBot V0.1 at your service. I was made to confuse. Why were you made, " + from + '?'
+}
+module.exports.help = function () {
+    var returnVar = '';
+    c.commands.forEach(command => {
+        returnVar += command + ' - '
+    });
+    return 'LufBot responds to these commands: ' + returnVar
 }
