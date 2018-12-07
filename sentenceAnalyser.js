@@ -3,8 +3,14 @@ const h = require('./helpers')
 const r = require('./replies')
 const c = require('./commands')
 
-
 module.exports.parse = function (message) {
+  if (h.matchWordFromList(message.toLowerCase, l.owo)){
+    return r.owo(exports.parser(message))
+  }
+  else return exports.parser(message)
+}
+
+module.exports.parser = function (message) {
   const {first_name} = message.from
 
   const {text} = message
@@ -47,8 +53,7 @@ module.exports.parse = function (message) {
       return who();
 
       case '/navy':
-      if (h.matchWord(clean, 'owo')) return r.owo(r.navy());
-      else return r.navy();
+      return r.navy();
 
       default:
       return 'I don\'t know the command: ' + command + ', but I should';
