@@ -169,5 +169,5 @@ module.exports.parse = function (message) {
   }
 
   //default
-  return h.pickRandom(l.iDontUnderstand + ', ' + first_name)
+  return h.pickRandom((l.iDontUnderstand) + ', ' + first_name)
 }
