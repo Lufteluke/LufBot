@@ -47,7 +47,7 @@ module.exports.parse = function (message) {
       return who();
 
       case '/navy':
-      if (h.msgMatch(clean, 'owo')) return r.owo(r.navy);
+      if (h.matchWord(clean, 'owo')) return r.owo(r.navy);
       else return r.navy();
 
       default:

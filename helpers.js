@@ -64,13 +64,13 @@ module.exports.pickRandom = function (array) {
     return array[Math.floor(Math.random() * array.length)]
 }
 
-module.exports.replace = function (allText, withText, inText) {
-    return inText.split(allText).join(withText)
+module.exports.replace = function (clean, allText, withText) {
+    return clean.split(allText).join(withText)
 }
 
-module.exports.replaceList = function (allInList, withText, inText) {
+module.exports.replaceList = function (clean, allInList, withText) {
     allInList.forEach(all => {
-        inText = exports.replace(all, withText, inText)
+        clean = exports.replace(clean, all, withText)
     });
-    return inText
+    return clean
 }

@@ -18,7 +18,7 @@ module.exports.asteriskAction = function (clean, from) { //todo get only center
 }
 
 module.exports.owo = function (clean){
-    return h.replaceList(['l','r'], 'w', clean)
+    return h.replaceList(clean, ['l','r'], 'w')
 }
 
 module.exports.default = function (from) {
@@ -26,29 +26,27 @@ module.exports.default = function (from) {
 }
 
 module.exports.who = function (clean, from ) {
-    const replace = h.pickRandom(l.subjects.concat(from))
+    const replaceTxt = h.pickRandom(l.subjects.concat(from))
     if (!h.matchWord('who')) {
-        return replace + clean.replace('?', '!')
+        return replaceTxt + clean.replace('?', '!')
     }
-    else return clean.replace('who', replace).replace('?', '!')
+    else return clean.replace('who', replaceTxt).replace('?', '!')
 }
 
 module.exports.beep = function (clean) {
-    clean = h.replace('beep', 'poop'. clean)
-    clean = h.replace('boop', 'beep', clean)
-    return h.replace('poop', 'boop', clean)
+    clean = h.replace(clean, 'beep', 'poop')
+    clean = h.replace(clean, 'boop', 'beep')
+    return h.replace(clean, 'poop', 'boop')
 }
 
 module.exports.fake = function (clean) {
-    if (!matchWord(clean, 'fake')){
-        return h.replace('gay', 'fake and gay', clean)
+    if (!h.matchWord(clean, 'fake')){
+        return h.replace(clean, 'gay', 'fake and gay')
     }
     else if (!matchWord(clean, 'gay')) {
-        return h.replace('fake', 'fake and gay', clean)
+        return h.replace(clean, 'fake', 'fake and gay')
     }
-    else return h.replace('pay', 'gay', 
-        h.replace('gay', 'fake', 
-            h.replace('fake', 'pay', clean)))
+    else return h.replace(h.replace(h.replace(clean, 'fake', 'qau'), 'gay', 'fake'), 'qay', 'gay')
 }
 
 module.exports.navy = function (){
