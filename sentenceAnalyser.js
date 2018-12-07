@@ -164,6 +164,16 @@ function parser (message) {
     else if (h.msgMatch(clean, 'wisdom')) {
       return 'Here is my wisdom: If a script is too large for your server, it\'s not yours'
     }
+
+    //good
+    else if (h.msgMatchAny(clean, l.good)){
+      r.good(first_name);
+    }
+
+    //bad
+    else if (h.msgMatchAny(clean, l.bad)){
+      r.bad(first_name);
+    }
   
     //greetings
     else if (h.matchWordFromList(clean, l.greetings)){

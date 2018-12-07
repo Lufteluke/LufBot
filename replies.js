@@ -78,8 +78,17 @@ module.exports.randomFact = function(from) {
 }
 
 module.exports.about = function (from) {
-    return "LufBot V0.1 at your service. I was made to confuse. Why were you made, " + from + '?'
+    return 'LufBot V0.1 at your service. I was made to confuse. Why were you made, ' + from + '?'
 }
+
+module.exports.good = function (from) {
+    return "I aim to please!, you're pretty " + h.pickRandom(l.good) + ' yourself, ' + from
+}
+
+module.exports.about = function (from) {
+    return "I'm sorry, but you're pretty " + h.pickRandom(l.good) + ' yourself, ' + from
+}
+
 module.exports.help = function () {
     var returnVar = '';
     c.commands.forEach(command => {
