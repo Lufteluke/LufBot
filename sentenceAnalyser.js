@@ -28,7 +28,7 @@ function parser (message) {
   const command = commandWithName.split('@')[0] //because it might be /talk@lufbot
   
   if ((command !== null) && h.matchWordFromList(command, c.commands)) {
-    clean = clean.replace(commandWithNamesplit, '') //we don't want the name
+    clean = clean.replace(commandWithName, '') //we don't want the name
     
     console.log('Command: ' + command)
     
