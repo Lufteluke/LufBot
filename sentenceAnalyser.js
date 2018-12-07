@@ -4,10 +4,16 @@ const r = require('./replies')
 const c = require('./commands')
 
 module.exports.parse = function (message) {
+  
+  var returnVar = exports.parser(message)
+  
   if (h.matchWordFromList(message.text.toLowerCase(), c.owo)){
-    return r.owo(exports.parser(message))
+    returnVar = r.owo(exports.parser(message))
   }
-  else return exports.parser(message)
+  
+  returnVar = returnVar.charAt(0).toUpperCase() + returnVar.slice(1);
+
+  return returnVar 
 }
 
 module.exports.parser = function (message) {
@@ -41,7 +47,7 @@ module.exports.parser = function (message) {
       return r.conspiracy();
       
       case '/fact':
-      return r.fact();
+      return r.fact(first_name);
       
       case '/help':
       return c.commands;
@@ -117,7 +123,7 @@ module.exports.parser = function (message) {
 
     //FACT
     if (h.msgMatchAny(clean, c.fact)){
-      return r.fact()
+      return r.fact(first_name)
     }
 
 

@@ -71,7 +71,7 @@ module.exports.fact = function (){
 module.exports.randomFact = function(from) {
     return [h.pickRandom(l.subjects),
         h.pickRandom(l.activities),
-        h.pickRandom(l.objects),
+        h.pickRandom(l.objects.concat(l.subjects.concat(from))),
         h.pickRandom(l.modifiers)].join(' ')
 }
 

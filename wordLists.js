@@ -87,14 +87,14 @@ module.exports.objects = [ //add all subjects
     //things
     'Garbage', 'movies', 'the camera', 'furry porn',
     //life
-    'life', 'humans', 'animals', 'foxes', 'death',
+    'life', 'humans', 'animals', 'foxes', 'death','air','atoms',
     //food
     'waffles', 'pizza'
 ]
 
 module.exports.modifiers = [
     //adverb
-    'intensively', ',but not really', '. Yes, really',
+    'intensively', ',but not really', '. Yes, really', 'literally', 
     //while
     'while drunk', 'while on drugs', 'while standing on one leg',
     //time
