@@ -13,9 +13,6 @@ module.exports.parse = function (message) {
   const split  = clean.split(' ')
   const command = split[0].toLowerCase()
   
-
-  return r.default(first_name);
-
   if ((command !== null) && h.matchWordFromList(command, c.commands)) {
     clean = clean.replace(command, '')
     
@@ -38,19 +35,20 @@ module.exports.parse = function (message) {
       return r.conspiracy();
       
       case '/fact':
-      return 'I don\'t know facts yet';
+      return r.fact();
       
       case '/help':
-      return c.commands
+      return c.commands;
       
       case '/about':
-      return 'I don\'t know about yet';
+      return r.about(from);
 
       case '/who':
       return who();
 
       case '/navy':
-      return r.navy();
+      if (h.msgMatch(clean, 'owo')) return r.owo(r.navy);
+      else return r.navy();
 
       default:
       return 'I don\'t know the command: ' + command + ', but I should';
@@ -159,10 +157,7 @@ module.exports.parse = function (message) {
     else if (h.matchWordFromList(clean, l.greetings)){
       return 'Hello, ' + first_name + ', how are you?'
     }  
-  
-    else if (h.matchWord(clean, 'about')) {
-      return "LufBot V0.1 at your service. I was made to confuse" 
-    }
+
   
     //default
     return r.default(first_name)

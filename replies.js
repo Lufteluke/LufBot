@@ -39,7 +39,7 @@ module.exports.beep = function (clean) {
     return h.replace('poop', 'boop', clean)
 }
 
-module.exports.beep = function (clean) {
+module.exports.fake = function (clean) {
     if (!matchWord(clean, 'fake')){
         return h.replace('gay', 'fake and gay', clean)
     }
@@ -66,5 +66,9 @@ module.exports.conspiracy = function (){
 }
 
 module.exports.fact = function (){
-    return pickRandom(l.facts)
+    return pickRandom(l.facts) //combine with people
+}
+
+module.exports.about = function (from) {
+    return "LufBot V0.1 at your service. I was made to confuse. Why were you made, " + from + '?'
 }
