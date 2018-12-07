@@ -46,7 +46,7 @@ module.exports.fake = function (clean) {
     else if (!h.matchWord(clean, 'gay')) {
         return h.replace(clean, 'fake', 'fake and gay')
     }
-    else return h.replace(h.replace(h.replace(clean, 'fake', 'qau'), 'gay', 'fake'), 'qay', 'gay')
+    else return h.replace(h.replace(h.replace(clean, 'fake', 'qau'), 'gay', 'fake'), 'qau', 'gay')
 }
 
 module.exports.navy = function (){
