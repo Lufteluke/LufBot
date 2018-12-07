@@ -7,6 +7,9 @@ module.exports.parse = function (message) {
   
   var returnVar = exports.parser(message)
   
+  if (returnVar.length == 0) {
+    r.default(message.from)
+  }
   if (h.matchWordFromList(message.text.toLowerCase(), c.owo)){
     returnVar = r.owo(exports.parser(message))
   }
