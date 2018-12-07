@@ -65,3 +65,14 @@ module.exports.subjects = [
     //Other
     'mondays', 'egg', 'horses', 'the birds', 'Foxyfluffs', 'no-one', 'everyone'
 ]
+
+module.exports.iDontUnderstand = [
+    'Please be autism, I have patience', 
+    'I don\'t get it', 
+    'It\'s not me, it\'s you', 
+    'I hope this doesn\' ruin our relationship', 
+    '500: OK', 
+    'I just don\'t know what went wrong', 
+    'No copy', 
+    'I know you mean well'
+]

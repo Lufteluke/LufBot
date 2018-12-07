@@ -2,8 +2,23 @@ module.exports.msgMatch = function (message, match) {
     return (message.includes(match))
 }
 
-module.exports.msgMatchWord = function (message, match) {//TODO
-    return (message.includes(match))
+module.exports.matchWord = function (message, match) {
+    var array = message.split(' ')
+    for (i = 0; i < array.length; i++){
+        if (array[i] == match) {
+            return true
+        }
+    }
+    return false
+}
+
+module.exports.matchWordFromList = function (message, matches) {
+    for (i = 0; i < matches.length; i++){
+        if (exports.matchWord(message, matches[i])) {
+            return true
+        }
+    }
+    return false
 }
 
 //Match any of input
