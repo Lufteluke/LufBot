@@ -85,7 +85,7 @@ module.exports.good = function (from) {
     return "I aim to please!, you're pretty " + h.pickRandom(l.good) + ' yourself, ' + from
 }
 
-module.exports.about = function (from) {
+module.exports.bad = function (from) {
     return "I'm sorry, but you're pretty " + h.pickRandom(l.good) + ' yourself, ' + from
 }
 
