@@ -15,48 +15,47 @@ module.exports.parse = function (message) {
 
   //return "Out of order"
 
-  if (h.matchWordFromList(command, c.commands)) {
+  if (command != null && h.matchWordFromList(command, c.commands)) {
     clean = clean.replace(command, '')
 
     switch (command) {
       case '/talk':
-      return command  +1
-        //return noCommand();
-        break;
+      return command  +1;
+      //return noCommand();
+      break;
       
       case '/owo':
-      return command  +2
+      return command  +2;
       //return r.owo(clean)
         break;
       
       case '/eight':
-      return command  +3
+      return command  +3;
         break;
       
       case '/music':
-      return command  +4
+      return command  +4;
         break;
       
       case '/conspiracy':
-      return command  +5
+      return command  +5;
         break;
       
       case '/fact':
-      return command  +6
+      return command  +6;
         break;
       
       case '/help':
-      return command  +7
+      return command  +7;
         break;
       
       case '/about':
-      return command  +8
+      return command  +8;
         break;
 
       default:
-      return command  +9
+      return command  +9;
         //noCommand()
-        break;
     }    
   }
   else {

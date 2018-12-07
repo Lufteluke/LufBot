@@ -56,9 +56,13 @@ function postString (reply, message, res) {
   })
 }
 
-
+const l = require('./wordLists')
+const h = require('./helpers')
+const r = require('./replies')
+const c = require('./commands')
 
 //server start
 app.listen(port, function() {
+  console.log(h.matchWordFromList('/talk', c.commands))
   console.log('LufBot listening on port ' + port)
 })
