@@ -166,13 +166,13 @@ function parser (message) {
     }
 
     //good
-    else if (h.msgMatchAny(clean, l.good)){
-      r.good(first_name);
+    else if (h.matchWordFromList(clean, l.good)){
+      r.good(first_name)
     }
 
     //bad
-    else if (h.msgMatchAny(clean, l.bad)){
-      r.bad(first_name);
+    else if (h.matchWordFromList(clean, l.bad)){
+      r.bad(first_name)
     }
   
     //greetings
