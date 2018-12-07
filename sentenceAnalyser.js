@@ -25,7 +25,7 @@ function parser (message) {
   var clean = text.toLowerCase()
   const split  = clean.split(' ')
   const commandWithName = split[0].toLowerCase()
-  const command = commandWithName.split('@', ' ')[0] //because it might be /talk@lufbot
+  const command = commandWithName.split('@')[0] //because it might be /talk@lufbot
   
   if ((command !== null) && h.matchWordFromList(command, c.commands)) {
     clean = clean.replace(commandWithNamesplit, '') //we don't want the name
@@ -66,7 +66,6 @@ function parser (message) {
       default:
       return 'I don\'t know the command: ' + command + ', but I should';
     }
-    return 'This should never occur!';
   }
   else {
     return noCommand();
