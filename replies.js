@@ -22,7 +22,7 @@ module.exports.owo = function (clean){
 }
 
 module.exports.default = function (from) {
-    return h.pickRandom(l.iDontUnderstand) + '. ' + h.pickRandom(l.doMe) + ' ' + from
+    return h.pickRandom(l.iDontUnderstand) + '. ' + h.pickRandom(l.doMe) + ', ' + from
 }
 
 module.exports.who = function (clean, from ) {
