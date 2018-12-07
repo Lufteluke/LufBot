@@ -3,9 +3,10 @@ const h = require('./helpers')
 const r = require('./replies')
 const c = require('./commands')
 
+//Finishing touches on string
 module.exports.parse = function (message) {
   
-  var returnVar = exports.parser(message)
+  var returnVar = parser(message)
   
   if (returnVar.length === 0) {
     returnVar = r.default(message.from.first_name)
@@ -17,17 +18,17 @@ module.exports.parse = function (message) {
   return h.capitaliseFirst(returnVar)
 }
 
-module.exports.parser = function (message) {
+function parser (message) {
   const {first_name} = message.from
-
   const {text} = message
-  const rawSplit = text.split(' ')
+
   var clean = text.toLowerCase()
   const split  = clean.split(' ')
-  const command = split[0].toLowerCase()
+  const commandWithName = split[0].toLowerCase()
+  const command = commandWithName.split('@', ' ')[0] //because it might be /talk@lufbot
   
   if ((command !== null) && h.matchWordFromList(command, c.commands)) {
-    clean = clean.replace(command, '')
+    clean = clean.replace(commandWithNamesplit, '') //we don't want the name
     
     console.log('Command: ' + command)
     
@@ -54,7 +55,7 @@ module.exports.parser = function (message) {
       return r.help();
       
       case '/about':
-      return r.about(from);
+      return r.about(first_name);
 
       case '/who':
       return r.who(clean, first_name);
