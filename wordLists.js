@@ -138,7 +138,9 @@ module.exports.good = [
     'nice',
     'cool',
     'haha',
-    'lol'
+    'lol',
+    'hug',
+    'love'
 ]
 
 module.exports.bad = [

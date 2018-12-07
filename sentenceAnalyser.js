@@ -167,12 +167,12 @@ function parser (message) {
 
     //good
     else if (h.matchWordFromList(clean, l.good)){
-      r.good(first_name)
+      return r.good(first_name)
     }
 
     //bad
     else if (h.matchWordFromList(clean, l.bad)){
-      r.bad(first_name)
+      return r.bad(first_name)
     }
   
     //greetings
