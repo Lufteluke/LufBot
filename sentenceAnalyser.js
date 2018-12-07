@@ -4,7 +4,7 @@ const r = require('./replies')
 const c = require('./commands')
 
 module.exports.parse = function (message) {
-  if (h.matchWordFromList(message.text.toLowerCase, c.owo)){
+  if (h.matchWordFromList(message.text.toLowerCase(), c.owo)){
     return r.owo(exports.parser(message))
   }
   else return exports.parser(message)
