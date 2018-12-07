@@ -50,7 +50,7 @@ module.exports.parser = function (message) {
       return r.about(from);
 
       case '/who':
-      return who();
+      return r.who();
 
       case '/navy':
       return r.navy();
