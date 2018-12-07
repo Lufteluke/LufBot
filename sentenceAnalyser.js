@@ -12,7 +12,7 @@ module.exports.parse = function (message) {
     returnVar = r.default(message.from.first_name)
   }
   if (h.matchWordFromList(message.text.toLowerCase(), c.owo)){
-    returnVar = r.owo(exports.parser(message))
+    returnVar = r.owo(returnVar)
   }
   
   return h.capitaliseFirst(returnVar)
