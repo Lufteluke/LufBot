@@ -11,9 +11,7 @@ module.exports.parse = function (message) {
     returnVar = r.owo(exports.parser(message))
   }
   
-  returnVar = returnVar.charAt(0).toUpperCase() + returnVar.slice(1);
-
-  return returnVar 
+  return h.capitaliseFirst(returnVar)
 }
 
 module.exports.parser = function (message) {

@@ -74,3 +74,8 @@ module.exports.replaceList = function (clean, allInList, withText) {
     });
     return clean
 }
+
+module.exports.capitaliseFirst = function (string) {
+    if (string.charAt(0) === null) return string
+    else return string.charAt(0).toUpperCase() + string.slice(1)
+}
