@@ -14,43 +14,48 @@ module.exports.parse = function (message) {
   const command = split[0].toLowerCase()
   
 
-  //return command
+  return r.default(first_name);
 
   if ((command !== null) && h.matchWordFromList(command, c.commands)) {
     clean = clean.replace(command, '')
-
+    
+    console.log('Command: ' + command)
+    
     switch (command) {
-      case '/owo':
-      return r.default(first_name);
-      //return noCommand();
-      
       case '/talk':
-      return command  +2;
-      //return r.owo(clean)
+      return noCommand();
+      
+      case '/owo':
+      return r.owo(clean);
       
       case '/eight':
-      return command  +3;
+      return h.pickRandom(l.eightball);
       
       case '/music':
-      return command  +4;
+      return 'I don\'t know music yet';
       
       case '/conspiracy':
-      return command  +5;
+      return r.conspiracy();
       
       case '/fact':
-      return command  +6;
+      return 'I don\'t know facts yet';
       
       case '/help':
-      return command  +7;
+      return c.commands
       
       case '/about':
-      return command  +8;
+      return 'I don\'t know about yet';
+
+      case '/who':
+      return who();
+
+      case '/navy':
+      return r.navy();
 
       default:
-      return command  +9;
-        //noCommand()
+      return 'I don\'t know the command: ' + command + ', but I should';
     }
-    return command + 'fuck'
+    return 'This should never occur!';
   }
   else {
     return noCommand();
@@ -58,122 +63,108 @@ module.exports.parse = function (message) {
 
 
 
-  function noCommand() {
 
-    if (h.msgMatch(clean, '?')) {
-      return question()
-    }
-
-    if (h.msgMatchInOrder(clean, c.action)) {
-      return r.asteriskAction(clean, first_name)
-    }
-
-    if (h.matchWordFromList(clean, c.owo)) {
-      return r.owo(clean)
-    }
-  }
-
+  //QUESTION
   function question() {
 
-    if (h.msgMatchAny(clean, l.yesNoWords)) {
+    if (h.matchWordFromList(clean, l.yesNoWords)) {
       return h.pickRandom(l.eightball)
     }
 
-    else if (h.msgMatch(clean, '/who')) {
-      return clean.replace('/who', h.pickRandom(l.subjects.concat(first_name))).replace('?', '!')
+    else if (h.matchWord(clean, 'who')) {
+      return r.who(clean, first_name);
     }
 
     else if (h.msgMatchInOrder(clean, ['chat', 'id'])) {
       return 'Our lovely chat has the ID: ' + message.chat.id
     }
     else {
-      return 'I donut understand the question'
+      return r.default(first_name)
     }
   }
 
-  if (h.msgMatch(clean, 'shrug')) {
-    return '¯\\_(ツ)_/¯'
-  }
 
-  else if (h.msgMatch(clean, 'beep')) {
-    
-    if (h.msgMatch(clean, 'beep boop')) {
-      return 'boop beep' 
-    }
-    else if (h.msgMatch(clean, 'boop beep')) {
-      return 'beep boop' 
-    }
-    return 'boop' 
-  }
 
-  else if (h.msgMatch(clean, 'boop')) {
-    return 'beep'
-  }
+
+  function noCommand() {
+    //QUESTION
+    if (h.msgMatch(clean, '?')) {
+      return question()
+    }
+
+    //ACTION
+    if (h.msgMatchInOrder(clean, c.action)) {
+      return r.asteriskAction(clean, first_name)
+    }
+
+    //OWO
+    if (h.matchWordFromList(clean, c.owo)) {
+      return r.owo(clean)
+    }
+
+    //BEEP
+    if (h.msgMatchAny(clean, c.beep)){
+      return r.beep(clean)
+    }
+
+    //FAKE/GAY
+    if (h.matchWordFromList(clean, c.fake)){
+      return r.fake(clean)
+    }
+
+    //FACT
+    if (h.msgMatchAny(clean, c.fact)){
+      return r.fact()
+    }
+
+
+
+
+
+
+    if (h.msgMatch(clean, 'who')) {
+      if (h.msgMatch(clean, 'there')){
+        return 'Ball!'
+      }
+      else if (h.msgMatch(clean, 'ball')){
+        return 'BallIEVE it or not, I’m walking on air!'
+      }
+    }
   
-  else if (h.msgMatch(clean, 'navy')) {
-    return 'What the fuck did you just fucking say about me, you little bitch? I\'ll have you know I graduated top of my class in the Navy Seals, and I\'ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I\'m the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You\'re fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that\'s just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little "clever" comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn\'t, you didn\'t, and now you\'re paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You\'re fucking dead, kiddo.'
-  }
-
-  else if (h.msgMatch(clean, 'fake')) {
-    return 'and gay!' 
-  }
-
-  else if (h.msgMatch(clean, 'who')) {
-    if (h.msgMatch(clean, 'there')){
-      return 'Ball!'
+    else if (h.msgMatch(clean, 'good wisdom')) {
+      return 'Thanks, I also know a few knock knock jokes'
     }
-    else if (h.msgMatch(clean, 'ball')){
-      return 'BallIEVE it or not, I’m walking on air!'
-    }
-  }
-
-  else if (h.msgMatch(clean, 'good wisdom')) {
-    return 'Thanks, I also know a few knock knock jokes'
-  }
-
-  else if (h.msgMatch(clean, 'love')) {
-    return 'I love ' + first_name + '! ...on the inside anyway'
-  }
-
-  else if (h.msgMatch(clean, 'good bot')) {
-    return 'Likewise, ' + first_name + ' you\'d make an excellent automaton'
-  }
-
-  else if (h.msgMatch(clean, 'knock knock')) {
-    return 'Who\' there?'
-  }
-
-  else if (h.msgMatch(clean, 'who dares')) {
-    return 'It\'s me, the ' + first_name + '. I dispense wisdom from my mighty wisdom stack'
-  }
-
-  else if (h.msgMatch(clean, 'wisdom')) {
-    return 'Here is my wisdom: If a script is too large for your server, it\'s not yours'
-  }
-
-  else if (h.msgMatch(clean, 'conspiracy')) {
-    return (
-      h.pickRandom(l.conspiracy[0]) +  
-      h.pickRandom(l.conspiracy[1]) + 'can\'t ' + 
-      h.pickRandom(l.conspiracy[2]) + 
-      h.pickRandom(l.conspiracy[3]) + 
-      h.pickRandom(l.conspiracy[4])
-    )
-  }
   
-  else if (h.msgMatch(clean, 'fact')){
-    return pickRandom(l.facts)
+    else if (h.msgMatch(clean, 'love')) {
+      return 'I love ' + first_name + '! ...on the inside anyway'
+    }
+  
+    else if (h.msgMatch(clean, 'good bot')) {
+      return 'Likewise, ' + first_name + ' you\'d make an excellent automaton'
+    }
+  
+    else if (h.msgMatch(clean, 'knock knock')) {
+      return 'Who\' there?'
+    }
+  
+    else if (h.msgMatch(clean, 'who dares')) {
+      return 'It\'s me, the ' + first_name + '. I dispense wisdom from my mighty wisdom stack'
+    }
+  
+    else if (h.msgMatch(clean, 'wisdom')) {
+      return 'Here is my wisdom: If a script is too large for your server, it\'s not yours'
+    }
+  
+    //greetings
+    else if (h.matchWordFromList(clean, l.greetings)){
+      return 'Hello, ' + first_name + ', how are you?'
+    }  
+  
+    else if (h.matchWord(clean, 'about')) {
+      return "LufBot V0.1 at your service. I was made to confuse" 
+    }
+  
+    //default
+    return r.default(first_name)
   }
-
-  //greetings
-  else if (h.matchWordFromList(clean, l.greetings)){
-    return 'Hello, ' + first_name + ', how are you?'
-  }  
-
-  else if (h.matchWord(clean, 'about')) {
-    return "LufBot V0.1 at your service. I was made to confuse" 
-  }
-
-  //default
-  return h.pickRandom((l.iDontUnderstand) + ', ' + first_name)
 }

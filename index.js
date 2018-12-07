@@ -63,6 +63,6 @@ const c = require('./commands')
 
 //server start
 app.listen(port, function() {
-  console.log(h.matchWordFromList('/talk', c.commands))
+  console.log(h.matchWordFromList('/music', c.commands))
   console.log('LufBot listening on port ' + port)
 })

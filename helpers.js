@@ -1,10 +1,12 @@
 module.exports.msgMatch = function (message, match) {
+    console.log(message + ' ?= ' + match)
     return (message.includes(match))
 }
 
 module.exports.matchWord = function (message, match) {
     var array = message.split(' ')
-    for (i = 0; i < array.length; i++){
+    for (var i = 0; i < array.length; i++){
+        console.log(array[i] + ' ?= ' + match)
         if (array[i] == match) {
             return true
         }
@@ -13,7 +15,7 @@ module.exports.matchWord = function (message, match) {
 }
 
 module.exports.matchWordFromList = function (message, matches) {
-    for (i = 0; i < matches.length; i++){
+    for (var i = 0; i < matches.length; i++){
         if (exports.matchWord(message, matches[i])) {
             return true
         }
@@ -60,4 +62,15 @@ module.exports.msgMatchInOrder = function (message, array) {
 
 module.exports.pickRandom = function (array) {
     return array[Math.floor(Math.random() * array.length)]
+}
+
+module.exports.replace = function (allText, withText, inText) {
+    return inText.split(allText).join(withText)
+}
+
+module.exports.replaceList = function (allInList, withText, inText) {
+    allInList.forEach(all => {
+        inText = exports.replace(all, withText, inText)
+    });
+    return inText
 }
