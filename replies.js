@@ -20,7 +20,7 @@ module.exports.asteriskAction = function (clean, from) { //todo get only center
 }
 
 module.exports.owo = function (clean){
-    return h.replaceList(clean, ['l','r'], 'w')
+    return h.replace(h.replaceList(clean, ['l','r'], 'w'), 'u', 'oo')
 }
 
 module.exports.default = function (from) {
