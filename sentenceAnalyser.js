@@ -9,8 +9,8 @@ module.exports.parse = function (message) {
 
   const {text} = message
   const rawSplit = text.split(' ')
-  const command = rawSplit[0].toLowerCase()
   var clean = text.toLowerCase()
+  const command = clean[0].toLowerCase()
   const split  = clean.split(' ')
 
   if (h.matchWordFromList(command, c.commands)) {

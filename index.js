@@ -3,7 +3,6 @@ const axios = require('axios')
 var express = require('express')
 var bodyParser = require('body-parser')
 var sentenceAnalyser = require('./sentenceAnalyser')
-var h = require('./helpers')
 
 var app = express()
 var port = process.env.PORT || 3000;
@@ -61,7 +60,5 @@ function postString (reply, message, res) {
 
 //server start
 app.listen(port, function() {
- 
-  const yesno = h.matchWord('1234d5 1111234511 11111 12345', '12345')
-  console.log('LufBot listening on port ' + port + ' / match ' + yesno)
+  console.log('LufBot listening on port ' + port)
 })

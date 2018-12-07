@@ -1,12 +1,16 @@
 const h = require('./helpers')
+const l = require('./wordLists')
 
 module.exports.asteriskAction = function (clean, from) { //todo get only center
-    clean.replace(/\*/)
-    if (h.msgMatch(clean, 'you')){
+    clean.replace(/\*/, '')
+    if (h.matchWord(clean, 'you')){
         return clean + ' back!~*'
       }
-      else if (h.msgMatchAny(clean, l.names)) {
-        return clean.replace('lufbot', from) + '*'
+      else if (h.matchWordFromList(clean, l.names)) {
+        l.names.forEach(name => {
+            clean = clean.replace(name, from)
+        });
+        return clean + '*'
       }
       else {
         return '0w0 ' + clean + ' all over ' + from + '*'
