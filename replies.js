@@ -96,3 +96,7 @@ module.exports.help = function () {
     });
     return 'LufBot responds to these commands: ' + returnVar
 }
+
+module.exports.yiff = function (clean) {
+    return '/yiff@e621bot ' + clean
+}

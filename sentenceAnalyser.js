@@ -63,6 +63,9 @@ function parser (message) {
       case '/navy':
       return r.navy();
 
+      case '/yiff':
+      return r.yiff(clean);
+
       default:
       return 'I don\'t know the command: ' + command + ', but I should';
     }
