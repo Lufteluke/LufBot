@@ -27,7 +27,7 @@ function parser (message) {
   const commandWithName = split[0].toLowerCase()
   const command = commandWithName.split('@')[0] //because it might be /talk@lufbot
   
-  if ((command !== null) && h.matchWordFromList(command, c.commands)) {
+  if ((command !== null) && h.matchWordFromList(command, c.commands.concat('/yiff'))) {
     clean = clean.replace(commandWithName, '') //we don't want the name
     
     console.log('Command: ' + command)
