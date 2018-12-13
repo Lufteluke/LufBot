@@ -21,10 +21,12 @@ console.log("ACTION: " + r.asteriskAction(input, from) + '\n')
 console.log("BAD: " + r.bad(from))
 console.log("GOOD: " + r.good(from) + '\n')
 
-changeInput ('bleep bloop bleep')
+changeInput ('bleep boop bleep')
 console.log("BEEP: " + r.beep(input) + '\n')
 
 changeInput ("eat all the spicy swedish meatballs")
+console.log("BORK: " + r.bork(input))
+changeInput ("")
 console.log("BORK: " + r.bork(input) + '\n')
 
 console.log("CONSPIRACY: " + r.conspiracy() + '\n')
@@ -50,3 +52,6 @@ console.log("YIFF: " + r.yiff(input) + '\n')
 console.log("NAVY: " + r.navy() + '\n')
 
 console.log("NAVYBORK:" + r.bork(r.navy()) + '\n')
+console.log("NAVYOWO:" + r.owo(r.navy()) + '\n')
+console.log("NAVYOWOBORK:" + r.bork(r.owo(r.navy()) + '\n'))
+console.log("NAVYBORKOWO:" + r.owo(r.bork(r.navy()) + '\n'))

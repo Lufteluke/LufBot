@@ -3,7 +3,7 @@ module.exports.commands = ['/talk', '/owo', '/eight', '/music', '/conspiracy', '
 //INLINE
 module.exports.action = ['*', '*']
 
-module.exports.beep = ['beep', 'boop']
+module.exports.beep = ['beep', 'boop', 'bleep', 'bloop']
 
 module.exports.fake = ['fake', 'gay']
 

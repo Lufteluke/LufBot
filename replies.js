@@ -36,9 +36,9 @@ module.exports.who = function (clean, from ) {
 }
 
 module.exports.beep = function (clean) {
-    clean = h.replace(clean, 'beep', 'ᛟ')
-    clean = h.replace(clean, 'boop', 'beep')
-    return h.replace(clean, 'ᛟ', 'boop')
+    clean = h.replace(clean, 'ee', 'ᛟ')
+    clean = h.replace(clean, 'oo', 'ee')
+    return h.replace(clean, 'ᛟ', 'oo')
 }
 
 module.exports.fake = function (clean) {
@@ -99,10 +99,12 @@ module.exports.help = function () {
 }
 
 module.exports.yiff = function (clean) {
-    return "I can't do that, you probably meant to use ```/yiff@e621bot " + clean + "```"
+    return "I can't do that, you probably meant to use '/yiff@e621bot " + clean + "'"
 }
 
 module.exports.bork = function (clean) {
+    if (clean.length === 0) return h.pickRandom(l.boerk)
+
     const borkSplit = h.replace(h.replaceList(clean, ['a','o'], 'u'), 'th', 'ze').split(' ')
     var returnVar = ''
     borkSplit.forEach(word => {

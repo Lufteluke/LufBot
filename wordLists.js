@@ -82,6 +82,7 @@ module.exports.bork = [
     'rork',
     'sork', 
     'torque',
+    'tork',
     'vork', 
     'work', 
     'xork', 

@@ -52,7 +52,7 @@ function postString (reply, message, res) {
 
   .catch(err => {
     console.log('Error: ' + err)
-    res.end('Error :' + err)
+    res.end('Error: ' + err)
   })
 }
 
