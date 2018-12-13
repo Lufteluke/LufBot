@@ -99,7 +99,7 @@ module.exports.help = function () {
 }
 
 module.exports.yiff = function (clean) {
-    return "I can't do that, you probably meant to use '/yiff@e621bot " + clean + "'"
+    return "I can't do that, you probably meant to use \n/yiff@e621bot " + clean
 }
 
 module.exports.bork = function (clean) {
