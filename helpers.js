@@ -1,12 +1,12 @@
 module.exports.msgMatch = function (message, match) {
-    console.log(message + ' ?= ' + match)
+    //console.log(message + ' ?= ' + match)
     return (message.includes(match))
 }
 
 module.exports.matchWord = function (message, match) {
     var array = message.split(' ')
     for (var i = 0; i < array.length; i++){
-        console.log(array[i] + ' ?= ' + match)
+        //console.log(array[i] + ' ?= ' + match)
         if (array[i] == match) {
             return true
         }
@@ -78,4 +78,11 @@ module.exports.replaceList = function (clean, allInList, withText) {
 module.exports.capitaliseFirst = function (string) {
     if (string.charAt(0) === null) return string
     else return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+module.exports.coinflip = function (againstOne) {
+    if (Math.floor(Math.random() * againstOne) === 0) {
+        return true
+    }
+    else return false
 }

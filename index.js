@@ -5,7 +5,7 @@ var bodyParser = require('body-parser')
 var sentenceAnalyser = require('./sentenceAnalyser')
 
 var app = express()
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 1337;
 const telegramApiKey = process.env.TELEGRAM_API_KEY || 'bot123456789:ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const apiUrl = 'https://api.telegram.org/bot' + telegramApiKey
 
@@ -51,7 +51,7 @@ function postString (reply, message, res) {
   })
 
   .catch(err => {
-    console.log('Error :', err)
+    console.log('Error: ' + err)
     res.end('Error :' + err)
   })
 }
@@ -61,8 +61,7 @@ const h = require('./helpers')
 const r = require('./replies')
 const c = require('./commands')
 
-//server start
+//START!
 app.listen(port, function() {
-  console.log(h.matchWordFromList('/music', c.commands))
   console.log('LufBot listening on port ' + port)
 })

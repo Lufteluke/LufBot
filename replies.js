@@ -1,22 +1,22 @@
 const l = require('./wordLists')
 const h = require('./helpers')
-const r = require('./replies')
 const c = require('./commands')
 
 module.exports.asteriskAction = function (clean, from) { //todo get only center
-    clean.replace(/\*/, '')
+    clean = h.replace(clean, '*', '')
     if (h.matchWord(clean, 'you')){
-        return clean + ' back!~*'
+        return '*' + clean + ' back!~*'
       }
-      else if (h.matchWordFromList(clean, l.names)) {
+    else if (h.matchWordFromList(clean, l.names)) {
         l.names.forEach(name => {
             clean = clean.replace(name, from)
+            return '*' + clean + '*'
         });
-        return clean + '*'
-      }
-      else {
-        return '0w0 ' + clean + ' all over ' + from + '*'
-      }
+    }
+    else {
+        return '0w0 *' + clean + ' all over ' + from + '*'
+    }
+    return '*Confused*'
 }
 
 module.exports.owo = function (clean){
@@ -36,9 +36,9 @@ module.exports.who = function (clean, from ) {
 }
 
 module.exports.beep = function (clean) {
-    clean = h.replace(clean, 'beep', 'poop')
+    clean = h.replace(clean, 'beep', 'ᛟ')
     clean = h.replace(clean, 'boop', 'beep')
-    return h.replace(clean, 'poop', 'boop')
+    return h.replace(clean, 'ᛟ', 'boop')
 }
 
 module.exports.fake = function (clean) {
@@ -48,7 +48,7 @@ module.exports.fake = function (clean) {
     else if (!h.matchWord(clean, 'gay')) {
         return h.replace(clean, 'fake', 'fake and gay')
     }
-    else return h.replace(h.replace(h.replace(clean, 'fake', 'qau'), 'gay', 'fake'), 'qau', 'gay')
+    else return h.replace(h.replace(h.replace(clean, 'fake', 'ᛟ'), 'gay', 'fake'), 'ᛟ', 'gay')
 }
 
 module.exports.navy = function (){
@@ -71,7 +71,8 @@ module.exports.fact = function (){
 }
 
 module.exports.randomFact = function(from) {
-    return [h.pickRandom(l.subjects),
+    return [
+        h.pickRandom(l.subjects),
         h.pickRandom(l.activities),
         h.pickRandom(l.objects.concat(l.subjects.concat(from))),
         h.pickRandom(l.modifiers)].join(' ')
@@ -90,7 +91,7 @@ module.exports.bad = function (from) {
 }
 
 module.exports.help = function () {
-    var returnVar = '';
+    var returnVar = ''
     c.commands.forEach(command => {
         returnVar += command + ' - '
     });
@@ -98,5 +99,19 @@ module.exports.help = function () {
 }
 
 module.exports.yiff = function (clean) {
-    return '/yiff@e621bot ' + clean
+    return "I can't do that, you probably meant to use ```/yiff@e621bot " + clean + "```"
+}
+
+module.exports.bork = function (clean) {
+    const borkSplit = h.replace(h.replaceList(clean, ['a','o'], 'u'), 'th', 'ze').split(' ')
+    var returnVar = ''
+    borkSplit.forEach(word => {
+        if (h.coinflip(5)) {
+            returnVar += h.pickRandom(l.boerk) + ' '
+        }
+        else {
+            returnVar += word + ' '
+        }
+    });
+    return returnVar
 }

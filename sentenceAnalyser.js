@@ -8,13 +8,23 @@ module.exports.parse = function (message) {
   
   var returnVar = parser(message)
   
+  //empty string catch
   if (returnVar.length === 0) {
     returnVar = r.default(message.from.first_name)
   }
-  if (h.matchWordFromList(message.text.toLowerCase(), c.owo)){
-    returnVar = r.owo(returnVar.toLowerCase())
+
+  else {
+    //borkify
+    if (h.matchWordFromList(message.text.toLowerCase(), c.bork)){
+      returnVar = r.bork(returnVar.toLowerCase())
+    }
+
+    //owoify
+    if (h.matchWordFromList(message.text.toLowerCase(), c.owo)){
+      returnVar = r.owo(returnVar.toLowerCase())
+    }
   }
-  
+    
   return h.capitaliseFirst(returnVar)
 }
 
@@ -25,7 +35,7 @@ function parser (message) {
   var clean = text.toLowerCase()
   const split  = clean.split(' ')
   const commandWithName = split[0].toLowerCase()
-  const command = commandWithName.split('@')[0] //because it might be /talk@lufbot
+  const command = commandWithName.split('@')[0] //because it might be /command@lufbot
   
   if ((command !== null) && h.matchWordFromList(command, c.commands.concat('/yiff'))) {
     clean = clean.replace(commandWithName, '') //we don't want the name
@@ -66,8 +76,11 @@ function parser (message) {
       case '/yiff':
       return r.yiff(clean);
 
+      case '/bork':
+      return r.bork(clean);
+
       default:
-      return 'I don\'t know the command: ' + command + ', but I should';
+      return "I don't know the command: " + command + ", but I should";
     }
   }
   else {
