@@ -49,9 +49,12 @@ console.log("OWO: " + r.owo(input) + '\n')
 
 changeInput ("safe")
 console.log("YIFF: " + r.yiff(input) + '\n')
-console.log("NAVY: " + r.navy() + '\n')
 
-console.log("NAVYBORK:" + r.bork(r.navy()) + '\n')
-console.log("NAVYOWO:" + r.owo(r.navy()) + '\n')
-console.log("NAVYOWOBORK:" + r.bork(r.owo(r.navy()) + '\n'))
-console.log("NAVYBORKOWO:" + r.owo(r.bork(r.navy()) + '\n'))
+console.log(r.lufReplace(r.navy()))
+
+//console.log("NAVY: " + r.navy() + '\n')
+
+//console.log("NAVYBORK:" + r.bork(r.navy()) s+ '\n')
+//console.log("NAVYOWO:" + r.owo(r.navy()) + '\n')
+//console.log("NAVYOWOBORK:" + r.bork(r.owo(r.navy()) + '\n'))
+//console.log("NAVYBORKOWO:" + r.owo(r.bork(r.navy()) + '\n'))
