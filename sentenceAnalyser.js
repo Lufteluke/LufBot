@@ -23,6 +23,11 @@ module.exports.parse = function (message) {
     if (h.matchWordFromList(message.text.toLowerCase(), c.owo)){
       returnVar = r.owo(returnVar.toLowerCase())
     }
+
+    //norskify
+    if (h.matchWordFromList(message.text.toLowerCase(), 'norsk')){
+      returnVar = r.lufReplace(returnVar.toLowerCase())
+    }
   }
     
   return h.capitaliseFirst(returnVar)
@@ -78,6 +83,9 @@ function parser (message) {
 
       case '/bork':
       return r.bork(clean, 5);
+
+      case '/norsk':
+      return r.lufReplace(clean);
 
       default:
       return "I don't know the command: " + command + ", but I should";

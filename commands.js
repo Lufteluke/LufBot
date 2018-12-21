@@ -1,4 +1,4 @@
-module.exports.commands = ['/talk', '/owo', '/eight', '/music', '/conspiracy', '/fact', '/help', '/about', '/who', '/navy', '/bork']
+module.exports.commands = ['/talk', '/owo', '/eight', '/music', '/conspiracy', '/fact', '/help', '/about', '/who', '/navy', '/bork', '/norsk']
 
 //INLINE
 module.exports.action = ['*', '*']
