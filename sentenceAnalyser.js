@@ -25,7 +25,7 @@ module.exports.parse = function (message) {
     }
 
     //norskify
-    if (h.matchWordFromList(message.text.toLowerCase(), 'norsk')){
+    if (h.matchWordFromList(message.text.toLowerCase(), c.lufReplace)){
       returnVar = r.lufReplace(returnVar.toLowerCase())
     }
   }

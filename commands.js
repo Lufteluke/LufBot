@@ -14,4 +14,6 @@ module.exports.owo = ['owo', '0w0']
 
 module.exports.bork = ['bork']
 
-module.exports.modifiers = exports.owo.concat(exports.bork)
+module.exports.lufReplace = ['norsk']
+
+module.exports.modifiers = exports.owo.concat(exports.bork, exports.lufReplace)
