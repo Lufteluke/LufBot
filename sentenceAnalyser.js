@@ -16,12 +16,17 @@ module.exports.parse = function (message) {
   else {
     //borkify
     if (h.matchWordFromList(message.text.toLowerCase(), c.bork)){
-      returnVar = r.bork(returnVar.toLowerCase())
+      returnVar = r.bork(returnVar.toLowerCase(), 5)
     }
 
     //owoify
     if (h.matchWordFromList(message.text.toLowerCase(), c.owo)){
       returnVar = r.owo(returnVar.toLowerCase())
+    }
+
+    //norskify
+    if (h.matchWordFromList(message.text.toLowerCase(), 'norsk')){
+      returnVar = r.lufReplace(returnVar.toLowerCase())
     }
   }
     
@@ -77,7 +82,10 @@ function parser (message) {
       return r.yiff(clean);
 
       case '/bork':
-      return r.bork(clean);
+      return r.bork(clean, 5);
+
+      case '/norsk':
+      return r.lufReplace(clean);
 
       default:
       return "I don't know the command: " + command + ", but I should";
@@ -121,11 +129,6 @@ function parser (message) {
     //ACTION
     if (h.msgMatchInOrder(clean, c.action)) {
       return r.asteriskAction(clean, first_name)
-    }
-
-    //OWO
-    if (h.matchWordFromList(clean, c.owo)) {
-      return r.owo(clean)
     }
 
     //BEEP
@@ -182,12 +185,12 @@ function parser (message) {
     }
 
     //good
-    else if (h.matchWordFromList(clean, l.good)){
+    else if (h.matchWordFromList(clean, l.positive)){
       return r.good(first_name)
     }
 
     //bad
-    else if (h.matchWordFromList(clean, l.bad)){
+    else if (h.matchWordFromList(clean, l.negative)){
       return r.bad(first_name)
     }
   
@@ -196,7 +199,6 @@ function parser (message) {
       return 'Hello, ' + first_name + ', how are you?'
     }  
 
-  
     //default
     return r.default(first_name)
   }

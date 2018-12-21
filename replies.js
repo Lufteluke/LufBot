@@ -102,13 +102,13 @@ module.exports.yiff = function (clean) {
     return "I can't do that, you probably meant to use \n/yiff@e621bot " + clean
 }
 
-module.exports.bork = function (clean) {
+module.exports.bork = function (clean, level) {
     if (clean.length === 0) return h.pickRandom(l.boerk)
 
     const borkSplit = h.replace(h.replaceList(clean, ['a','o'], 'u'), 'th', 'ze').split(' ')
     var returnVar = ''
     borkSplit.forEach(word => {
-        if (h.coinflip(5)) {
+        if (h.coinflip(level)) {
             returnVar += h.pickRandom(l.boerk) + ' '
         }
         else {
@@ -116,4 +116,26 @@ module.exports.bork = function (clean) {
         }
     });
     return returnVar
+}
+
+module.exports.dyr = function (clean, level) {
+    if (clean.length === 0) return 'dyr'
+    var returnVar = ''
+    clean.split(' ').forEach(word => {
+        if (h.coinflip(level)) {
+            returnVar += word.split(/\b/)[0] + h.pickRandom(l.lufCompounds) + ' '
+        }
+        else {
+            returnVar += word + ' '
+        }
+    });
+    return returnVar
+}
+
+module.exports.lufReplace = function (clean) {
+    l.lufWords.forEach(replacement => {
+        clean = h.replace(clean, replacement[0], replacement[1])
+    });
+
+    return exports.dyr(clean, 5)
 }
