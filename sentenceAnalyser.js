@@ -87,6 +87,9 @@ function parser (message) {
       case '/norsk':
       return r.lufReplace(clean);
 
+      case '/brainfuck':
+      return r.brainfuck(clean);
+
       default:
       return "I don't know the command: " + command + ", but I should";
     }
