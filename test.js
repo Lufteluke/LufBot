@@ -58,3 +58,6 @@ console.log(r.lufReplace(r.navy()))
 //console.log("NAVYOWO:" + r.owo(r.navy()) + '\n')
 //console.log("NAVYOWOBORK:" + r.bork(r.owo(r.navy()) + '\n'))
 //console.log("NAVYBORKOWO:" + r.owo(r.bork(r.navy()) + '\n'))
+
+changeInput ("++[>++[>+++<-]<-]")
+console.log(r.brainfuck(input))
