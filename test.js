@@ -59,5 +59,5 @@ console.log(r.lufReplace(r.navy()))
 //console.log("NAVYOWOBORK:" + r.bork(r.owo(r.navy()) + '\n'))
 //console.log("NAVYBORKOWO:" + r.owo(r.bork(r.navy()) + '\n'))
 
-changeInput ("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.")
+changeInput ("++[>++[>+++<-]<-]")
 console.log(r.brainfuck(input))
