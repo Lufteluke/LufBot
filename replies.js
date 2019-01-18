@@ -142,36 +142,60 @@ module.exports.lufReplace = function (clean) {
 
 module.exports.brainfuck = function (program) {
     var tape = [0, 0, 0, 0]
+    var negativeTape = [0,0,0,0]
     var positiveTape = tape
-    var negativeTape = []
+    
     var cellIndex = 0
-    var cell = 0
+    var cell = cellIndex
     var index = 0
-    var loopStack = []
-    var output = ""
-    var searchLoop = false
     var iteration = 0
-    const terminate = 5000
+
+    var loopStack = []
+    var searchLoop = 0
+
+    var output = ""
+    var returnVar = ""
+    var programDump = ""
+
+    const terminate = 10000
+    const wrapCell = !h.matchWord(program, "nowrap")
+
+    
 
     while (program[index] != null) {
+        iteration++
 
 
+        while (searchLoop != 0) {
+            if (program[index] == undefined) break
+            if (program[index] == '[') {
+                searchLoop ++ 
+            }
 
-        while (searchLoop) {
-            console.log('search ' + program[index])
-            searchLoop = (program[index] != ']')
-            if (searchLoop) console.log("Found ]!")
-            index++
+            else if (program[index] == ']') {
+                searchLoop --
+            }
+
+            if (searchLoop == 0) console.log("Found ]")
+            index ++
         }
 
-        /* console.log("Program: " + program.slice(0,index).toString() + '____' + program[index] + '____' + program.slice(index+1).toString() ) */
+        console.log(
+        '#' + iteration + 
+        " Program: " + program.slice(0,index).toString() +
+        '____' + program[index] +
+        '____' + program.slice(index+1).toString() +
+        " | Cell: " + tape[cell])
 
         switch (program[index]) {
+            case undefined:
+                break
+
             case '>': //pointer right
                 cellIndex++
                 cell = h.negativeIndex(cellIndex)
 
-                if (cellIndex > 0) {
+                if (cellIndex >= 0) {
                     tape = positiveTape
                 }
                 else {
@@ -179,8 +203,8 @@ module.exports.brainfuck = function (program) {
                 }
 
                 if (typeof tape[cell] === 'undefined') {
-                    //console.log("adding cell")
-                    tape.push(0)
+                    //console.log("adding cells")
+                    tape.push(0, 0, 0, 0)
                 }
 
                 index++
@@ -202,8 +226,8 @@ module.exports.brainfuck = function (program) {
                 }
 
                 if (typeof tape[cell] === 'undefined') {
-                    console.log("adding cell")
-                    tape.push(0)
+                    //console.log("adding cells")
+                    tape.push(0, 0, 0, 0)
                 }
 
                 index++
@@ -214,6 +238,7 @@ module.exports.brainfuck = function (program) {
             case '+': //increment memory
                 tape[cell]++
                 index++
+                if (wrapCell && tape[cell] >= 256) tape[cell] = 0
                 break
 
 
@@ -222,6 +247,7 @@ module.exports.brainfuck = function (program) {
 
                 tape[cell]--
                 index++
+                if (wrapCell && tape[cell] <= -1) tape[cell] = 255
                 break
 
 
@@ -242,19 +268,19 @@ module.exports.brainfuck = function (program) {
 
 
             case '[': //while
-                if (tape[cell] <= 0) { //break
-                    searchLoop = true
+                if (tape[cell] == 0) { //break
+                    searchLoop = 1
                 }
                 else { //add "[" to stack
                     loopStack.push(index)
-                    index++
                 }
+                index++
                 break
 
 
 
             case ']': //do
-                if (tape[cell] <= 0) {//break
+                if (tape[cell] == 0) {//break
                     loopStack.pop()
                     index++
                 }
@@ -271,15 +297,26 @@ module.exports.brainfuck = function (program) {
                 break
         }
 
-
-        iteration++
-        /* console.log('#' + iteration + ' | Index: ' + index + " | Cellindex: " + cellIndex + " | LoopStack: " + loopStack.toString())
-        console.log('Tape: ' + negativeTape.reverse().concat(positiveTape.toString())) */
+        /* console.log(
+        ' | Index: ' + index + 
+        ' | Cellindex: ' + cellIndex + 
+        '/' + cell +
+        ' | LoopStack: ' + loopStack.toString() + 
+        ' | Tape: ' + negativeTape.slice().reverse().toString() + ' -|+ ' + positiveTape.toString() + ' |') */
 
         if (iteration == terminate) {
-            console.log("Terminated for taking too long! Output: " + output)
-            return "Output: " + output + '\n' + negativeTape.reverse().toString() + ' -|+ ' + positiveTape.toString()
+            returnVar += "Terminated for taking over " + terminate + " iterations! \n"
+            break        
         }
     }
-    return "Output: " + output + '\n' + negativeTape.reverse().toString() + ' -|+ ' + positiveTape.toString()
+
+    var memoryDump = ""
+            negativeTape.slice().reverse().concat(positiveTape).forEach(char => {
+                memoryDump += String.fromCharCode(char)  
+            });
+
+    returnVar += 'Output: "' + output +
+            '\n Tape: ' + negativeTape.reverse().toString() + ' -|+ ' + positiveTape.toString() +
+            '\n Dump: "' + memoryDump
+    return returnVar
 }

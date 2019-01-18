@@ -59,5 +59,13 @@ console.log(r.lufReplace(r.navy()))
 //console.log("NAVYOWOBORK:" + r.bork(r.owo(r.navy()) + '\n'))
 //console.log("NAVYBORKOWO:" + r.owo(r.bork(r.navy()) + '\n'))
 
-changeInput ("++[>++[>+++<-]<-]")
+//changeInput ("<-<--<---<----<----->++++>+++>++>+>+>++>+++>++++>+++++") //minustest
+//changeInput ("++<>++") //minustest
+//changeInput (">++++++++[-<+++++++++>]<.>>+>-[+]++>++>+++[>[->+++<<+++>]<<]>-----.>->+++..+++.>-.<<+[>[+>+]>>]<--------------.>>.+++.------.--------.>+.>+.") //fancy hello world, negative index #812
+//changeInput ("--<-<<+[+[<+>--->->->-<<<]>]<<--.<++++++.<<-..<<.<+.>>.>>.<<<.+++.>>.>>-.<<<+.") // short hello world !!!! NO WORK UP TO 99 999
+//changeInput("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++. dump") //hello world #905
+changeInput("+[.+] nowrap") //sweep
+//changeInput("+[-->-[>>+>-----<<]<--<---]>-.>>>+.>>..+++[.>]<<<<.+++.------.<<-.>>>>+.") //72byte HW #16570
+//changeInput("+[>>>->-[>->----<<<]>>]>.---.>+..+++.>>.<.>>---.<<<.+++.------.<-.>>+.") //70byte HW #28741
+//changeInput(">+<<->>>++<<<<--")
 console.log(r.brainfuck(input))
