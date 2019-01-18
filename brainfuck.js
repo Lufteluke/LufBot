@@ -17,7 +17,7 @@ module.exports.brainfuck = function (program) {
     var returnVar = ""
     var programDump = ""
 
-    const terminate = 50000
+    const terminate = h.matchWord(program, "long")? 50000 : 10000
     const wrapCell = !h.matchWord(program, "nowrap")
     if (wrapCell) program = h.replace(program, "nowrap", "")
 
