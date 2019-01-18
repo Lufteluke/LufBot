@@ -2,6 +2,7 @@ const l = require('./wordLists')
 const h = require('./helpers')
 const r = require('./replies')
 const c = require('./commands')
+const b = require('./brainfuck')
 
 //Finishing touches on string
 module.exports.parse = function (message) {
@@ -88,7 +89,7 @@ function parser (message) {
       return r.lufReplace(clean);
 
       case '/brainfuck':
-      return r.brainfuck(clean);
+      return b.brainfuck(program);
 
       default:
       return "I don't know the command: " + command + ", but I should";

@@ -1,4 +1,5 @@
 const r = require('./replies')
+const b = require('./brainfuck')
 const from = "TestBot"
 var input = "test"
 
@@ -68,4 +69,4 @@ changeInput("+[.+] nowrap") //sweep
 //changeInput("+[-->-[>>+>-----<<]<--<---]>-.>>>+.>>..+++[.>]<<<<.+++.------.<<-.>>>>+.") //72byte HW #16570
 //changeInput("+[>>>->-[>->----<<<]>>]>.---.>+..+++.>>.<.>>---.<<<.+++.------.<-.>>+.") //70byte HW #28741
 //changeInput(">+<<->>>++<<<<--")
-console.log(r.brainfuck(input))
+console.log(b.brainfuck(input))
