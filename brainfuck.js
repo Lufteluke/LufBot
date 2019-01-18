@@ -17,14 +17,16 @@ module.exports.brainfuck = function (program) {
     var returnVar = ""
     var programDump = ""
 
-    const terminate = 10000
+    const terminate = 50000
     const wrapCell = !h.matchWord(program, "nowrap")
+    if (wrapCell) program = h.replace(program, "nowrap", "")
 
     while (program[index] != null) {
         iteration++
 
         while (searchLoop != 0) {
             if (program[index] == undefined) break
+
             if (program[index] == '[') {
                 searchLoop++
             }
@@ -32,8 +34,6 @@ module.exports.brainfuck = function (program) {
             else if (program[index] == ']') {
                 searchLoop--
             }
-
-            if (searchLoop == 0) console.log("Found ]")
             index++
         }
 
