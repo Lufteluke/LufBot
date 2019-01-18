@@ -89,7 +89,7 @@ function parser (message) {
       return r.lufReplace(clean);
 
       case '/brainfuck':
-      return b.brainfuck(program);
+      return b.brainfuck(clean);
 
       default:
       return "I don't know the command: " + command + ", but I should";
