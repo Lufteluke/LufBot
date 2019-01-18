@@ -180,12 +180,12 @@ module.exports.brainfuck = function (program) {
             index ++
         }
 
-        console.log(
+        /* console.log(
         '#' + iteration + 
         " Program: " + program.slice(0,index).toString() +
         '____' + program[index] +
         '____' + program.slice(index+1).toString() +
-        " | Cell: " + tape[cell])
+        " | Cell: " + tape[cell]) */
 
         switch (program[index]) {
             case undefined:
@@ -315,8 +315,8 @@ module.exports.brainfuck = function (program) {
                 memoryDump += String.fromCharCode(char)  
             });
 
-    returnVar += 'Output: "' + output +
+    returnVar += 'Output: ' + output +
             '\n Tape: ' + negativeTape.reverse().toString() + ' -|+ ' + positiveTape.toString() +
-            '\n Dump: "' + memoryDump
+            '\n Dump: ' + memoryDump
     return returnVar
 }
