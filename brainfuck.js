@@ -1,4 +1,3 @@
-const h = require('./helpers')
 
 module.exports.brainfuck = function (program) {
     var tape = [0, 0, 0, 0]
@@ -11,38 +10,20 @@ module.exports.brainfuck = function (program) {
     var iteration = 0
 
     var loopStack = []
-    var searchLoop = 0
 
     var output = ""
     var returnVar = ""
     var programDump = ""
 
-    const terminate = h.matchWord(program, "long")? 50000 : 10000
-    const wrapCell = !h.matchWord(program, "nowrap")
-    if (wrapCell) program = h.replace(program, "nowrap", "")
+    const long = 50000
+    const short = 10000
+    const terminate = findAndDeleteCommand("long") ? long : short
+    const wrapCell = !findAndDeleteCommand("nowrap")
 
     while (program[index] != null) {
         iteration++
 
-        while (searchLoop != 0) {
-            if (program[index] == undefined) break
-
-            if (program[index] == '[') {
-                searchLoop++
-            }
-
-            else if (program[index] == ']') {
-                searchLoop--
-            }
-            index++
-        }
-
-        /* console.log(
-            '#' + iteration +
-            " Program: " + program.slice(0, index).toString() +
-            '____' + program[index] +
-            '____' + program.slice(index + 1).toString() +
-            " | Cell: " + tape[cell]) */
+        //logProgram()
 
         switch (program[index]) {
             case undefined:
@@ -50,20 +31,8 @@ module.exports.brainfuck = function (program) {
 
             case '>': //pointer right
                 cellIndex++
-                cell = h.negativeIndex(cellIndex)
-
-                if (cellIndex >= 0) {
-                    tape = positiveTape
-                }
-                else {
-                    tape = negativeTape
-                }
-
-                if (typeof tape[cell] === 'undefined') {
-                    //console.log("adding cells")
-                    tape.push(0, 0, 0, 0)
-                }
-
+                cell = findRelativeIndex()
+                checkTape()
                 index++
                 break
 
@@ -71,22 +40,8 @@ module.exports.brainfuck = function (program) {
 
             case '<': //pointer left
                 cellIndex--
-                cell = h.negativeIndex(cellIndex)
-
-                if (cellIndex >= 0) {
-                    //console.log('tape is positive')
-                    tape = positiveTape
-                }
-                else {
-                    //console.log('tape is negative')
-                    tape = negativeTape
-                }
-
-                if (typeof tape[cell] === 'undefined') {
-                    //console.log("adding cells")
-                    tape.push(0, 0, 0, 0)
-                }
-
+                cell = findRelativeIndex()
+                checkTape()
                 index++
                 break
 
@@ -94,8 +49,8 @@ module.exports.brainfuck = function (program) {
 
             case '+': //increment memory
                 tape[cell]++
+                if (wrapCell && tape[cell] == 256) tape[cell] = 0
                 index++
-                if (wrapCell && tape[cell] >= 256) tape[cell] = 0
                 break
 
 
@@ -103,8 +58,8 @@ module.exports.brainfuck = function (program) {
             case '-': //decrement memory
 
                 tape[cell]--
+                if (wrapCell && tape[cell] == -1) tape[cell] = 255
                 index++
-                if (wrapCell && tape[cell] <= -1) tape[cell] = 255
                 break
 
 
@@ -118,7 +73,7 @@ module.exports.brainfuck = function (program) {
 
             case ',': //input
                 //TODO
-                tape[cell] = 'F'.charCodeAt(0)
+                tape[cell] = 'F'.charCodeAt(0) //TODO add easter
                 index++
                 break
 
@@ -126,12 +81,13 @@ module.exports.brainfuck = function (program) {
 
             case '[': //while
                 if (tape[cell] == 0) { //break
-                    searchLoop = 1
+                    index = findEndOfLoop()
                 }
                 else { //add "[" to stack
                     loopStack.push(index)
+                    index++
                 }
-                index++
+
                 break
 
 
@@ -148,17 +104,12 @@ module.exports.brainfuck = function (program) {
 
 
 
-            default:
+            default: //non-brainfuck character
                 index++
                 break
         }
 
-        /* console.log(
-        ' | Index: ' + index + 
-        ' | Cellindex: ' + cellIndex + 
-        '/' + cell +
-        ' | LoopStack: ' + loopStack.toString() + 
-        ' | Tape: ' + (negativeTape.length >= 1 ? negativeTape.reverse().toString() + ' -|+ ' : "") + positiveTape.toString() + ' |') */
+        //logState()
 
         if (iteration >= terminate) {
             returnVar += "Terminated for taking over " + terminate + " iterations! \n"
@@ -166,13 +117,95 @@ module.exports.brainfuck = function (program) {
         }
     }
 
-    var memoryDump = ""
-    negativeTape.slice().reverse().concat(positiveTape).forEach(char => {
-        memoryDump += String.fromCharCode(char)
-    });
-
     returnVar += 'Output: ' + output +
-        '\n Tape: ' + (negativeTape.length >= 1 ? negativeTape.reverse().toString() + ' -|+ ' : "") + positiveTape.toString() +
-        '\n Dump: ' + memoryDump
+        '\n Tape: ' + getFullTapeString() +
+        '\n Dump: ' + memoryDump()
     return returnVar
+
+
+
+
+
+
+
+
+
+    function checkTape() {
+        if (cellIndex >= 0) {
+            tape = positiveTape
+        }
+        else {
+            tape = negativeTape
+        }
+        if (typeof tape[cell] === 'undefined') {
+            tape.push(0, 0, 0, 0)
+        }
+    }
+
+    function findRelativeIndex() {
+        if (cellIndex >= 0) {
+            return cellIndex
+        }
+        else {
+            return Math.abs(cellIndex) - 1
+        }
+    }
+
+    function memoryDump() {
+        var memoryDump = ""
+        negativeTape.slice().reverse().concat(positiveTape).forEach(char => {
+            memoryDump += String.fromCharCode(char)
+        });
+        return memoryDump
+    }
+
+    function logProgram() {
+        console.log(
+            '#' + iteration +
+            " Program: " + program.slice(0, index).toString() +
+            '____' + program[index] +
+            '____' + program.slice(index + 1).toString())
+    }
+
+    function logState() {
+        console.log(
+            ' | Index: ' + index +
+            ' | Cell index: ' + cellIndex + '/' + cell +
+            " | Cell content: " + tape[cell] +
+            ' | LoopStack: ' + loopStack.toString() +
+            ' | Tape: ' + getFullTapeString() + ' |')
+    }
+
+    function getFullTapeString() {
+        return ((negativeTape.length == 0 ? "" :  negativeTape.slice().reverse().toString() + ' -|+ ') + positiveTape.toString()) //TODO highlight current
+    }
+
+    function findEndOfLoop() {
+        var searchLoop = 1
+        var internalIndex = index + 1
+        while (searchLoop != 0) {
+            if (program[internalIndex] == undefined) break
+
+            if (program[internalIndex] == '[') {
+                searchLoop++
+            }
+
+            else if (program[internalIndex] == ']') {
+                searchLoop--
+            }
+            internalIndex++
+        }
+        return internalIndex
+    }
+
+    function findAndDeleteCommand (command) {
+        var array = program.split(' ')
+        for (var i = 0; i < array.length; i++){
+            if (array[i] == command) {
+                program = program.split(' ' + command).join('')
+                return true
+            }
+        }
+        return false
+    }
 }

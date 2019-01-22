@@ -79,7 +79,7 @@ module.exports.randomFact = function (from) {
 }
 
 module.exports.about = function (from) {
-    return 'LufBot V0.1 at your service. I was made to confuse. Why were you made, ' + from + '?'
+    return "LufBot V0.1 at your service, I was made to confuse. I'm open source and can be found at https://github.com/Lufteluke/LufBot \n Why were you made, " + from + '?'
 }
 
 module.exports.good = function (from) {

@@ -86,12 +86,3 @@ module.exports.coinflip = function (againstOne) {
     }
     else return false
 }
-
-module.exports.negativeIndex = function (index) {
-    if (index >= 0){
-        return index
-    } 
-    else{
-        return Math.abs(index)-1
-    }              
-}
