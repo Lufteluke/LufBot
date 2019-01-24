@@ -139,3 +139,7 @@ module.exports.lufReplace = function (clean) {
 
     return exports.dyr(clean, 5)
 }
+
+module.exports.echoMsg = function (msg) {
+    return msg.toString()
+}

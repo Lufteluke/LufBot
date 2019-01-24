@@ -86,3 +86,13 @@ module.exports.coinflip = function (againstOne) {
     }
     else return false
 }
+
+module.exports.encode = function (string) {
+    var output = "["
+    var arr = string.split('')
+    while (arr.length !== 0) {
+        output += arr.pop().charCodeAt() + ((arr.length !== 0) ? ',' : '')
+    }
+    output += ']'
+    return output
+}

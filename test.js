@@ -51,9 +51,9 @@ console.log("OWO: " + r.owo(input) + '\n')
 changeInput ("safe")
 console.log("YIFF: " + r.yiff(input) + '\n')
 
-console.log(r.lufReplace(r.navy()))
+//console.log(r.lufReplace(r.navy()))
 
-//console.log("NAVY: " + r.navy() + '\n')
+console.log("NAVY: " + r.navy() + '\n')
 
 //console.log("NAVYBORK:" + r.bork(r.navy()) s+ '\n')
 //console.log("NAVYOWO:" + r.owo(r.navy()) + '\n')
@@ -70,6 +70,7 @@ console.log(r.lufReplace(r.navy()))
 //changeInput("+[-->-[>>+>-----<<]<--<---]>-.>>>+.>>..+++[.>]<<<<.+++.------.<<-.>>>>+.") //72byte HW #16570
 //changeInput("+[>>>->-[>->----<<<]>>]>.---.>+..+++.>>.<.>>---.<<<.+++.------.<-.>>+.") //70byte HW #28741
 //changeInput(">+<<->>>++<<<<--")
-changeInput(",-----.... long nowrap") //sweep
+//changeInput(",-----.... long nowrap") //sweep
+changeInput("+[,.]") //input test
 console.log(b.brainfuck(input))
 

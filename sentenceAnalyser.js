@@ -91,6 +91,9 @@ function parser (message) {
       case '/brainfuck':
       return b.brainfuck(clean);
 
+      case '/echo':
+      return r.echoMsg(message)
+
       default:
       return "I don't know the command: " + command + ", but I should";
     }
