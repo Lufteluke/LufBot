@@ -1,5 +1,6 @@
 const r = require('./replies')
 const b = require('./brainfuck')
+const h = require('./helpers')
 const from = "TestBot"
 var input = "test"
 
@@ -74,3 +75,12 @@ console.log("NAVY: " + r.navy() + '\n')
 changeInput("+[,.]") //input test
 console.log(b.brainfuck(input))
 
+//console.log('meep:' + b.encode('a'))
+//console.log(b.brainfuck(b.encode(b.brainfuck('+[,.]')) + ' long'))
+console.log(b.brainfuck(b.encode("a b") + ' long'))
+
+
+/* console.log("Factor1, factor2, leftover")
+for (i = 0; i<256; i ++) {
+    console.log(i + ': ' + h.findBalancedFactors(i))
+} */

@@ -1,3 +1,5 @@
+const h = require('./helpers')
+
 module.exports.brainfuck = function (program) {
     var tape = [0, 0, 0, 0]
     var negativeTape = []
@@ -14,7 +16,7 @@ module.exports.brainfuck = function (program) {
     var returnVar = ""
     var programDump = ""
 
-    const long = 50000
+    const long = 1000000
     const short = 10000
     const terminate = findAndDeleteCommand("long") ? long : short
     const wrapCell = !findAndDeleteCommand("nowrap")
@@ -73,7 +75,7 @@ module.exports.brainfuck = function (program) {
 
             case ',': //input
                 //TODO
-                tape[cell] =  inputVars[inputVars.length-1] != undefined ? inputVars.pop() : 0
+                tape[cell] =  inputVars.pop() || 0
                 index++
                 break
 
@@ -209,3 +211,146 @@ module.exports.brainfuck = function (program) {
         return false
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports.encode = function (stringInput) {
+    var input = stringInput.split('')
+    var output = ''
+    var charcode = 0
+
+    var negCell = 0
+    var posCell = 0
+
+    var currentCell = posCell
+    var depth = 0
+    var offset = 0
+    var offsetDown
+    var symbol = '+'
+    var spool = '>'
+
+
+    input.forEach(letter => {
+        charcode = letter.charCodeAt()
+
+       /*  if (charcode <= 96 && spool == '>') {
+            spool = '<'
+            output += spool
+            posCell = currentCell
+            currentCell = negCell
+        }
+        else if (spool == '<') {
+            spool = '>'
+            output += spool
+            negCell = currentCell
+            currentCell = posCell
+        } */
+        //?         5            200    = -195
+        offset = charcode - currentCell
+        //?      256       200      +  5 = 61
+        //offset = 256 - currentCell + charcode
+
+
+
+        symbol = (offset < 0) ? '-' : '+'
+        absOffset = Math.abs(offset)
+
+        output += generateLoop(absOffset, symbol, spool) + '.'
+        //output += generatePlain(offset)+ '.'
+        //output += generateSymbol(absOffset, '+') + '.'
+
+        currentCell = charcode
+    });
+    console.log(output)
+    return output
+
+
+
+
+
+
+
+
+
+    function generatePlain(offset) {
+        console.log('Offset in plain: ' + offset)
+        var output = ''
+        var symbol = (offset >= 0) ? '+' : '-'
+        offset = Math.abs(offset)
+    
+        while(offset != 0){
+                output += symbol
+                offset--
+        }
+        return output
+    }
+    
+
+
+
+    function generateSymbol(offset, symbol) {
+        offset = Math.abs(offset)
+        var output = ''
+    
+        for(i = 0; i < offset; i++){
+                output += symbol
+        }
+        return output
+    }
+    
+
+
+
+
+    function generateLoop(offset, symbol, spool) {
+        var output = ""
+        const sp = spool
+        const us = spool == '<' ? '>' : '<'
+        offset = Math.abs(offset)
+        depth++
+
+        console.log(depth + '- Offset in loop: ' + offset)
+    
+        //make plain series if less than 13 difference (as it makes no difference)
+        if (offset <= 13){
+            output += generateSymbol(offset, symbol)
+        }
+    
+        else{
+            var factors = h.findBalancedFactors(offset)
+            
+            
+            var leftVal = generateLoop(factors[0], '+', spool) //left of, always positive
+            var innerVal = generateLoop(factors[1], symbol, spool) //inside loop
+            var addVal = factors[2] ? '' + generateSymbol(factors[2], symbol): ''
+
+            
+            //   >++[<     >++[<++>-]<]    >-]<]
+            output += sp.repeat(depth) + leftVal + '[' + us.repeat(depth) + innerVal + sp.repeat(depth) + '-]' + us.repeat(depth) + addVal
+
+            //console.log(depth + '- Recursed: ' + leftVal + ' | ' + innerVal + ' | ' + addVal)
+            //console.log(depth + '- Output: ' + output.toString())
+        }
+        
+        console.log(depth + '- Returning: ' + output)
+        depth--
+        return output
+    }
+}
+
