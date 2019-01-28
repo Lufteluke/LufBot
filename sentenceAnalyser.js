@@ -91,8 +91,9 @@ function parser (message) {
       case '/brainfuck':
       return b.brainfuck(clean);
 
-      case '/encode'
+      case '/encode':
       return b.encode(clean)
+
 
       case '/echo':
       return r.echoMsg(message)
