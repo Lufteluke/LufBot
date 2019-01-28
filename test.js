@@ -66,21 +66,15 @@ console.log("NAVY: " + r.navy() + '\n')
 //changeInput (">++++++++[-<+++++++++>]<.>>+>-[+]++>++>+++[>[->+++<<+++>]<<]>-----.>->+++..+++.>-.<<+[>[+>+]>>]<--------------.>>.+++.------.--------.>+.>+.") //fancy hello world, negative index #812
 //changeInput ("--<-<<+[+[<+>--->->->-<<<]>]<<--.<++++++.<<-..<<.<+.>>.>>.<<<.+++.>>.>>-.<<<+.") // short hello world !!!! NO WORK UP TO 99 999
 //changeInput("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.") //hello world #905
-//changeInput("+[+.]") //sweep
+changeInput("+[+.]") //sweep
 //changeInput("+[>+] nowrap long") //fill array
 //changeInput("+[-->-[>>+>-----<<]<--<---]>-.>>>+.>>..+++[.>]<<<<.+++.------.<<-.>>>>+.") //72byte HW #16570
 //changeInput("+[>>>->-[>->----<<<]>>]>.---.>+..+++.>>.<.>>---.<<<.+++.------.<-.>>+.") //70byte HW #28741
 //changeInput(">+<<->>>++<<<<--")
 //changeInput(",-----.... long nowrap") //sweep
-changeInput("+[,.]") //input test
+//changeInput("+[,.]") //input test
 console.log(b.brainfuck(input))
 
 //console.log('meep:' + b.encode('a'))
 //console.log(b.brainfuck(b.encode(b.brainfuck('+[,.]')) + ' long'))
-console.log(b.brainfuck(b.encode("a b") + ' long'))
-
-
-/* console.log("Factor1, factor2, leftover")
-for (i = 0; i<256; i ++) {
-    console.log(i + ': ' + h.findBalancedFactors(i))
-} */
+console.log(b.brainfuck(b.encode("a baÿ") + ' long'))
