@@ -79,7 +79,7 @@ module.exports.randomFact = function (from) {
 }
 
 module.exports.about = function (from) {
-    return "LufBot V0.1 at your service, I was made to confuse. I'm open source and can be found at https://github.com/Lufteluke/LufBot \n Why were you made, " + from + '?'
+    return "Brainfuck Bot V0.1. I can run brainfuck code and encode strings to semi-compact brainfuck. I'm open source and can be found at https://github.com/Lufteluke/LufBot/tree/BrainfuckBot"
 }
 
 module.exports.good = function (from) {
@@ -91,11 +91,8 @@ module.exports.bad = function (from) {
 }
 
 module.exports.help = function () {
-    var returnVar = ''
-    c.commands.forEach(command => {
-        returnVar += command + ' - '
-    });
-    return 'LufBot responds to these commands: ' + returnVar
+    return "`/decode` lets you run arbitrary brainfuck code. if you include `long` if you expext your command to do more than 10 000 iterations. Use `nowrap` if you don't want cellvalues to be restricted to 0-255 \n\n" +
+    "`/encode` will encode whatever follows it"
 }
 
 module.exports.yiff = function (clean) {
