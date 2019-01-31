@@ -91,7 +91,7 @@ module.exports.bad = function (from) {
 }
 
 module.exports.help = function () {
-    return "`/decode` lets you run arbitrary brainfuck code. if you include `long` if you expext your command to do more than 10 000 iterations. Use `nowrap` if you don't want cellvalues to be restricted to 0-255 \n\n" +
+    return "`/decode` lets you run arbitrary brainfuck code. if you include `long` if you expext your command to do more than 10 000 iterations. Use `nowrap` if you don't want cellvalues to be restricted to 0-255. Interactive input is not supported, but it will insert random input in its place \n\n" +
     "`/encode` will encode whatever follows it"
 }
 
