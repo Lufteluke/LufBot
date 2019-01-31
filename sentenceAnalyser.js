@@ -49,54 +49,14 @@ function parser (message) {
     console.log('Command: ' + command)
     
     switch (command) {
-      case '/talk':
-      return noCommand();
-      
-      case '/owo':
-      return r.owo(clean);
-      
-      case '/eight':
-      return h.pickRandom(l.eightball);
-      
-      case '/music':
-      return 'I don\'t know music yet';
-      
-      case '/conspiracy':
-      return r.conspiracy();
-      
-      case '/fact':
-      return r.fact(first_name);
-      
       case '/help':
       return r.help();
       
-      case '/about':
-      return r.about(first_name);
-
-      case '/who':
-      return r.who(clean, first_name);
-
-      case '/navy':
-      return r.navy();
-
-      case '/yiff':
-      return r.yiff(clean);
-
-      case '/bork':
-      return r.bork(clean, 5);
-
-      case '/norsk':
-      return r.lufReplace(clean);
-
       case '/brainfuck':
       return b.brainfuck(clean);
 
       case '/encode':
       return b.encode(clean)
-
-
-      case '/echo':
-      return r.echoMsg(message)
 
       default:
       return "I don't know the command: " + command + ", but I should";
