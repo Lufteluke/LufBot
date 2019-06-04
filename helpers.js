@@ -10,6 +10,7 @@ module.exports.substringMatch = function (message, match) {
 module.exports.matchWordWithSymbols = function (message, match) {
     var array = message.toLowerCase().split(' ')
     for (var i = 0; i < array.length; i++) {
+        console.log(array[i] + " | " + match + (array[i] == match))
         if (array[i] == match) {
             return true
         }
@@ -26,6 +27,16 @@ module.exports.matchWord = function (message, match) {
 module.exports.matchWordFromList = function (message, matches) {
     for (var i = 0; i < matches.length; i++) {
         if (exports.matchWord(message, matches[i])) {
+            return true
+        }
+    }
+    return false
+}
+
+//returns true if a word matches any word in a list  
+module.exports.matchWordWithSymbolsFromList = function (message, matches) {
+    for (var i = 0; i < matches.length; i++) {
+        if (exports.matchWordWithSymbols(message, matches[i])) {
             return true
         }
     }
