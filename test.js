@@ -82,9 +82,9 @@ console.log(b.brainfuck(input))
 //console.log(b.brainfuck(b.encode(b.brainfuck('+[,.]')) + ' long'))
 //console.log(b.brainfuck(b.encode("a baÿ") + ' long'))
 
-changeInput("Hiii, this is pig latin")
+changeInput("Hi, this is fancy speech from latin america")
 console.log("PIGLATIN: " + p.piglatinEncode(input))
-console.log("LATINPIG: " + p.piglatinDecode(p.piglatinEncode(input)))
+console.log("LATINPIG: " + p.piglatinDecode(p.piglatinEncode(input) + ""))
 console.log("ECHO:" + r.echoMsg({test: this, now: new Date()}))
 
 //console.log("MATCH: " + h.matchWordWithSymbols("/latin", c.commands))

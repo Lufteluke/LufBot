@@ -8,9 +8,9 @@ module.exports.substringMatch = function (message, match) {
 
 //returns true if a word is contained within.
 module.exports.matchWordWithSymbols = function (message, match) {
-    var array = message.split(' ')
+    var array = message.toLowerCase().split(' ')
     for (var i = 0; i < array.length; i++) {
-        if (array[i] == message) {
+        if (array[i] == match) {
             return true
         }
     }
@@ -19,7 +19,7 @@ module.exports.matchWordWithSymbols = function (message, match) {
 
 //returns true if a word is contained within. Ignores symbols
 module.exports.matchWord = function (message, match) {
-    exports.matchWordWithSymbols(exports.replaceList(message, l.symbols, ''), match)
+    return exports.matchWordWithSymbols(exports.replaceList(message, l.symbols, ''), match)
 }
 
 //returns true if a word matches any word in a list  

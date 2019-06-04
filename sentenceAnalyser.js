@@ -17,17 +17,17 @@ module.exports.parse = function (message) {
 
   else {
     //borkify
-    if (h.matchWordFromList(message.text.toLowerCase(), c.bork)){
+    if (h.matchWordFromList(message.text, c.bork)){
       returnVar = r.bork(returnVar.toLowerCase(), 5)
     }
 
     //owoify
-    if (h.matchWordFromList(message.text.toLowerCase(), c.owo)){
+    if (h.matchWordFromList(message.text, c.owo)){
       returnVar = r.owo(returnVar.toLowerCase())
     }
 
     //norskify
-    if (h.matchWordFromList(message.text.toLowerCase(), c.lufReplace)){
+    if (h.matchWordFromList(message.text, c.lufReplace)){
       returnVar = r.lufReplace(returnVar.toLowerCase())
     }
   }
