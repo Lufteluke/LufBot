@@ -1,6 +1,8 @@
 const r = require('./replies')
 const b = require('./brainfuck')
 const h = require('./helpers')
+const p = require('./piglatin')
+
 const from = "TestBot"
 var input = "test"
 
@@ -77,4 +79,9 @@ console.log(b.brainfuck(input))
 
 //console.log('meep:' + b.encode('a'))
 //console.log(b.brainfuck(b.encode(b.brainfuck('+[,.]')) + ' long'))
-console.log(b.brainfuck(b.encode("a baÿ") + ' long'))
+//console.log(b.brainfuck(b.encode("a baÿ") + ' long'))
+
+changeInput("Hi, this is pig latin")
+console.log("PIGLATIN: " + p.piglatinEncode(input))
+
+console.log("ECHO:" + r.echoMsg({test: this, now: new Date()}))

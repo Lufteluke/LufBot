@@ -3,6 +3,7 @@ const h = require('./helpers')
 const r = require('./replies')
 const c = require('./commands')
 const b = require('./brainfuck')
+const p = require('./piglatin')
 
 //Finishing touches on string
 module.exports.parse = function (message) {
@@ -94,9 +95,11 @@ function parser (message) {
       case '/encode':
       return b.encode(clean)
 
-
       case '/echo':
       return r.echoMsg(message)
+
+      case '/latin':
+      return p.piglatinEncode(clean)
 
       default:
       return "I don't know the command: " + command + ", but I should";
@@ -133,7 +136,7 @@ function parser (message) {
 
   function noCommand() {
     //QUESTION
-    if (h.msgMatch(clean, '?')) {
+    if (h.substringMatch(clean, '?')) {
       return question()
     }
 
@@ -143,7 +146,7 @@ function parser (message) {
     }
 
     //BEEP
-    if (h.msgMatchAny(clean, c.beep)){
+    if (h.substringMatchAny(clean, c.beep)){
       return r.beep(clean)
     }
 

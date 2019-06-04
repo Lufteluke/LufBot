@@ -141,5 +141,5 @@ module.exports.lufReplace = function (clean) {
 }
 
 module.exports.echoMsg = function (msg) {
-    return msg.toString()
+    return JSON.stringify(msg)
 }

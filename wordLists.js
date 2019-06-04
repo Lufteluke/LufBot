@@ -234,6 +234,10 @@ module.exports.lufWords = [
     ['f', 'ph']
 ]
 
+module.exports.consonants = ['q','w','r','t','p','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m']
+module.exports.vowels = ['e','y','u','i','o','a','å','ø','æ','ë','ÿ','ï','ö','ä',]
+module.exports.symbols = [',','.',';',':','-','+','/','!','?','=','(',')','[',']','{','}','%','#','"',"'",'`','~','$','£','€']
+
 module.exports.lufCompounds = [
     'dyr',
     'sopp'
