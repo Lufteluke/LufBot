@@ -6,7 +6,7 @@ module.exports.piglatinEncode = function (clean) {
     var out = ""
 
     words.forEach(word => {
-
+        if (word.length == 0) return
         var remainder = word
         var leadingConsonants = ""
         var symbols = ""
