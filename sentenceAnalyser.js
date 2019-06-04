@@ -123,7 +123,7 @@ function parser (message) {
       return r.who(clean, first_name);
     }
 
-    else if (h.msgMatchInOrder(clean, ['chat', 'id'])) {
+    else if (h.substringMatchInOrder(clean, ['chat', 'id'])) {
       return 'Our lovely chat has the ID: ' + message.chat.id
     }
     else {
@@ -141,7 +141,7 @@ function parser (message) {
     }
 
     //ACTION
-    if (h.msgMatchInOrder(clean, c.action)) {
+    if (h.substringMatchInOrder(clean, c.action)) {
       return r.asteriskAction(clean, first_name)
     }
 
@@ -156,7 +156,7 @@ function parser (message) {
     }
 
     //FACT
-    if (h.msgMatchAny(clean, c.fact)){
+    if (h.substringMatchAny(clean, c.fact)){
       return r.fact(first_name)
     }
 
@@ -165,36 +165,36 @@ function parser (message) {
 
 
 
-    if (h.msgMatch(clean, 'who')) {
-      if (h.msgMatch(clean, 'there')){
+    if (h.substringMatch(clean, 'who')) {
+      if (h.substringMatch(clean, 'there')){
         return 'Ball!'
       }
-      else if (h.msgMatch(clean, 'ball')){
+      else if (h.substringMatch(clean, 'ball')){
         return 'BallIEVE it or not, I’m walking on air!'
       }
     }
   
-    else if (h.msgMatch(clean, 'good wisdom')) {
+    else if (h.substringMatch(clean, 'good wisdom')) {
       return 'Thanks, I also know a few knock knock jokes'
     }
   
-    else if (h.msgMatch(clean, 'love')) {
+    else if (h.substringMatch(clean, 'love')) {
       return 'I love ' + first_name + '! ...on the inside anyway'
     }
   
-    else if (h.msgMatch(clean, 'good bot')) {
+    else if (h.substringMatch(clean, 'good bot')) {
       return 'Likewise, ' + first_name + ' you\'d make an excellent automaton'
     }
   
-    else if (h.msgMatch(clean, 'knock knock')) {
+    else if (h.substringMatch(clean, 'knock knock')) {
       return 'Who\' there?'
     }
   
-    else if (h.msgMatch(clean, 'who dares')) {
+    else if (h.substringMatch(clean, 'who dares')) {
       return 'It\'s me, the ' + first_name + '. I dispense wisdom from my mighty wisdom stack'
     }
   
-    else if (h.msgMatch(clean, 'wisdom')) {
+    else if (h.substringMatch(clean, 'wisdom')) {
       return 'Here is my wisdom: If a script is too large for your server, it\'s not yours'
     }
 

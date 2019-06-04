@@ -54,13 +54,12 @@ module.exports.substringMatchAll = function (message, array) {
 }
 
 //Match in order
-module.exports.msgMatchInOrder = function (message, array) {
+module.exports.substringMatchInOrder = function (message, array) {
     var index = -1
     var current = -1
-    var conditionMet = true
 
     for (i = 0; i < array.length; i++){
-        current = message.indexOf(element, (index + 1))
+        current = message.indexOf(array[i], (index + 1))
         if (current == -1) {
             return false
         }
