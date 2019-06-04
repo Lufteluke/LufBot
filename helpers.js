@@ -10,7 +10,7 @@ module.exports.substringMatch = function (message, match) {
 module.exports.matchWordWithSymbols = function (message, match) {
     var array = message.split(' ')
     for (var i = 0; i < array.length; i++) {
-        if (array[i] == match) {
+        if (array[i] == message) {
             return true
         }
     }

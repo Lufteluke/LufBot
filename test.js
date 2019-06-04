@@ -2,6 +2,7 @@ const r = require('./replies')
 const b = require('./brainfuck')
 const h = require('./helpers')
 const p = require('./piglatin')
+const c = require('./commands')
 
 const from = "TestBot"
 var input = "test"
@@ -85,3 +86,5 @@ changeInput("Hi, this is pig latin")
 console.log("PIGLATIN: " + p.piglatinEncode(input))
 
 console.log("ECHO:" + r.echoMsg({test: this, now: new Date()}))
+
+//console.log("MATCH: " + h.matchWordWithSymbols("/latin", c.commands))
