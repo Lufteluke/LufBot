@@ -92,7 +92,7 @@ function parser (message) {
       case '/brainfuck':
       return b.brainfuck(clean);
 
-      case '/encode':
+      case '/brainfuckencode':
       return b.encode(clean)
 
       case '/echo':
@@ -100,6 +100,9 @@ function parser (message) {
 
       case '/latin':
       return p.piglatinEncode(clean)
+
+      case '/latindecode':
+      return p.piglatinDecode(clean)
 
       default:
       return "I don't know the command: " + command + ", but I should";
