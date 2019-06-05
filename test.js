@@ -3,88 +3,180 @@ const b = require('./brainfuck')
 const h = require('./helpers')
 const p = require('./piglatin')
 const c = require('./commands')
+const sentenceAnalyser = require('./sentenceAnalyser')
 
 const from = "TestBot"
 var input = "test"
 
-function changeInput(string) {
-    console.log("The input is now '" + string + "'")
-    input = string
+var message = {
+    "message_id":0000,
+    "from":{
+        "id":0000000,
+        "is_bot":false,
+        "first_name":from,
+        "username":"TESTBOT",
+        "language_code":"en"
+    },
+    "chat":{
+        "id":-000000000,
+        "title":"GROUPNAME",
+        "type":"group",
+        "all_members_are_administrators":false
+    },
+    "date":0000000000,
+    "text":input,
+    "entities":[
+        {"offset":0,"length":5,"type":"bot_command"}
+    ]
 }
 
-console.log("About: " + r.about(from) + '\n')
+function change(string) {
+    console.log("The input is now \"" + string + "\"")
+    input = string
+    message.text = string
+}
 
-changeInput ("*hugs*")
-console.log("ACTION: " + r.asteriskAction(input, from))
-changeInput ("*hugs lufbot*")
-console.log("ACTION: " + r.asteriskAction(input, from))
-changeInput ("*hugs bot*")
-console.log("ACTION: " + r.asteriskAction(input, from))
-changeInput ("*hugs you*")
-console.log("ACTION: " + r.asteriskAction(input, from) + '\n')
+function test(comment) {
+    comment = comment.toUpperCase()
+    console.log(comment + " : \n\"" + sentenceAnalyser.parse(message) + "\"\n")
+}
 
-console.log("BAD: " + r.bad(from))
-console.log("GOOD: " + r.good(from) + '\n')
+function direct(comment, target) {
+    comment = comment.toUpperCase()
+    var a = h.capitaliseFirst(target(message.text)).trim()
+    var b = h.capitaliseFirst(sentenceAnalyser.parse(message)).trim()
+    console.log("(direct) " + comment + " : \n\"" + a + ((a==b)? "\"\n":"\"") )
+    if (a!=b) h.warn("\n\"" + b + "\" \nNot identical to analyser! \n")
+}
 
-changeInput ('bleep boop bleep')
-console.log("BEEP: " + r.beep(input) + '\n')
+function type(comment) {
+    console.log("\n______________ " + comment.toUpperCase() + " ______________\n")
+}
 
-changeInput ("eat all the spicy swedish meatballs")
-console.log("BORK: " + r.bork(input))
-changeInput ("")
-console.log("BORK: " + r.bork(input) + '\n')
+//______________ COMMANDS ______________
+type("Commands")
 
-console.log("CONSPIRACY: " + r.conspiracy() + '\n')
+change("/echo beep")
+test("Echo")
 
-console.log("DEFAULT: " + r.default(from) + '\n')
+change("/about")
+test("About")
 
-console.log("FACT: " + r.fact() + '\n')
+change ("/help")
+test("Help")
 
-changeInput ("fake")
-console.log("FAKE: " + r.fake(input))
-changeInput ("gay")
-console.log("FAKE: " + r.fake(input))
-changeInput ("fake and gay")
-console.log("FAKE: " + r.fake(input) + '\n')
+change ("/owo what's this? Notices your code")
+test("OWO")
 
-console.log("HELP: " + r.help() + '\n')
+change ("/eight will you crash?")
+test("Eightball")
 
-changeInput ("hello, I love your face")
-console.log("OWO: " + r.owo(input) + '\n')
+change ("/music")
+test("Music")
 
-changeInput ("safe")
-console.log("YIFF: " + r.yiff(input) + '\n')
+change ("/conspiracy")
+test("Conspiracy")
 
-//console.log(r.lufReplace(r.navy()))
+change ("/fact")
+test("Fact")
 
-console.log("NAVY: " + r.navy() + '\n')
+change ("/who made lufbot?")
+test("Who")
 
-//console.log("NAVYBORK:" + r.bork(r.navy()) s+ '\n')
-//console.log("NAVYOWO:" + r.owo(r.navy()) + '\n')
-//console.log("NAVYOWOBORK:" + r.bork(r.owo(r.navy()) + '\n'))
-//console.log("NAVYBORKOWO:" + r.owo(r.bork(r.navy()) + '\n'))
+change ("/navy")
+test("NAVY")
 
-//changeInput ("<-<--<---<----<----->++++>+++>++>+>+>++>+++>++++>+++++") //minustest
-//changeInput ("++<>++") //minustest
-//changeInput (">++++++++[-<+++++++++>]<.>>+>-[+]++>++>+++[>[->+++<<+++>]<<]>-----.>->+++..+++.>-.<<+[>[+>+]>>]<--------------.>>.+++.------.--------.>+.>+.") //fancy hello world, negative index #812
-//changeInput ("--<-<<+[+[<+>--->->->-<<<]>]<<--.<++++++.<<-..<<.<+.>>.>>.<<<.+++.>>.>>-.<<<+.") // short hello world !!!! NO WORK UP TO 99 999
-//changeInput("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.") //hello world #905
-changeInput("+[+.]") //sweep
-//changeInput("+[>+] nowrap long") //fill array
-//changeInput("+[-->-[>>+>-----<<]<--<---]>-.>>>+.>>..+++[.>]<<<<.+++.------.<<-.>>>>+.") //72byte HW #16570
-//changeInput("+[>>>->-[>->----<<<]>>]>.---.>+..+++.>>.<.>>---.<<<.+++.------.<-.>>+.") //70byte HW #28741
-//changeInput(">+<<->>>++<<<<--")
-//changeInput(",-----.... long nowrap") //sweep
-//changeInput("+[,.]") //input test
-console.log(b.brainfuck(input))
+change("/bork I like to eat Norwegian Swedes")
+//change("")
+test("Bork")
 
-//console.log('meep:' + b.encode('a'))
-//console.log(b.brainfuck(b.encode(b.brainfuck('+[,.]')) + ' long'))
-//console.log(b.brainfuck(b.encode("a baÿ") + ' long'))
+change ("/norsk I always try to speak Norwegian when I code")
+test("Norsk")
 
-changeInput("Hi, this is fancy speech from latin america")
-console.log("PIGLATIN: " + p.piglatinEncode(input))
-console.log("LATINPIG: " + p.piglatinDecode(p.piglatinEncode(input) + ""))
-console.log("ECHO:" + r.echoMsg({test: this, now: new Date()}))
+//change ("/brainfuck <-<--<---<----<----->++++>+++>++>+>+>++>+++>++++>+++++") //minustest
+//change ("/brainfuck ++<>++") //minustest
+//change ("/brainfuck >++++++++[-<+++++++++>]<.>>+>-[+]++>++>+++[>[->+++<<+++>]<<]>-----.>->+++..+++.>-.<<+[>[+>+]>>]<--------------.>>.+++.------.--------.>+.>+.") //fancy hello world, negative index #812
+//change ("/brainfuck --<-<<+[+[<+>--->->->-<<<]>]<<--.<++++++.<<-..<<.<+.>>.>>.<<<.+++.>>.>>-.<<<+.") // short hello world !!!! NO WORK UP TO 99 999
+//change("/brainfuck ++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.") //hello world #905
+//change("/brainfuck +[+.]") //sweep
+//change("/brainfuck +[>+] nowrap long") //fill array
+//change("/brainfuck +[-->-[>>+>-----<<]<--<---]>-.>>>+.>>..+++[.>]<<<<.+++.------.<<-.>>>>+.") //72byte HW #16570
+//change("/brainfuck +[>>>->-[>->----<<<]>>]>.---.>+..+++.>>.<.>>---.<<<.+++.------.<-.>>+.") //70byte HW #28741
+//change("/brainfuck >+<<->>>++<<<<--")
+//change("/brainfuck ,-----.... long nowrap") //sweep
+//change("/brainfuck +[,.]") //input test
+//test("BRAINFUCK")
 
-//console.log("MATCH: " + h.matchWordWithSymbols("/latin", c.commands))
+change("/brainfuckencode abca")
+//change("/brainfuckencode a baÿ long")
+//change("/brainfuckencode " + b.brainfuck('+[,.]') + ' long')
+test("BF encode")
+change("/brainfuck " + b.encode("abca"))
+//change("/brainfuck " + b.encode("abcaa baÿ long"))
+//change("/brainfuck " + b.encode(b.brainfuck('+[,.]') + ' long'))
+test("BF encode decoded")
+
+//change("/latin Hi, this is fancy speech from latin america")
+change("/latin Hi, this is fancy speech from latin america novay")
+test("Piglatin")
+//change("/latindecode " + p.encode("Hi, this is fancy speech from latin america"))
+change("/latindecode novay " + p.encode("Hi, this is fancy speech from latin america novay"))
+test("Latinpig")
+
+//______________ MUTATE ______________
+type("Mutate")
+change("/navy norsk")
+//direct("NAVYNORSK", r.lufReplace)
+test("Navynorsk")
+
+change("/navy owo")
+//direct("NAVYOWO", r.owo)
+test("Navyowo")
+
+change("/navy bork")
+//direct("NAVYBORK", r.bork)
+test("Navybork")
+
+change("/navy bork norsk owo")
+test("Navyborkowonorsk")
+
+
+//______________ SPEECH ______________
+type("Speech")
+
+change ("*hugs lufbot*")
+test("ACTION")
+change ("*hugs bot*")
+test("ACTION")
+change ("*hugs you*")
+test("ACTION")
+
+change("good bot")
+test("GOOD")
+change("bad bot")
+test("BAD")
+
+change ('bleep boop bleep')
+direct("BLEEP", r.beep)
+
+change ("Hello, Lufbot")
+test ("HELLO")
+
+direct("DEFAULT", r.default)
+
+change("fact me")
+//direct("FACT", r.fact)
+test("FACT")
+
+//change ("fake")
+//change ("gay")
+change ("fake and gay")
+direct("FAKE", r.fake)
+
+change("hello, I love your face owo")
+direct("OWO", r.owo)
+
+change("/yiff safe")
+direct("YIFF", r.yiff)
+
+//console.log("MATCH: " + h.matchWordFromListWithSymbols("/latin", c.commands, true))

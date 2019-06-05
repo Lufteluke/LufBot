@@ -6,11 +6,20 @@ module.exports.substringMatch = function (message, match) {
     return (message.includes(match))
 }
 
+module.exports.warn = function (string){
+    console.warn("\x1b[43m\x1b[30mWARN: " + string, "\x1b[0m")
+}
+module.exports.error = function (string){
+    console.err("\x1b[43m\x1b[30mWARN: " + string, "\x1b[0m")
+}
+
 //returns true if a word is contained within.
-module.exports.matchWordWithSymbols = function (message, match) {
+module.exports.matchWordWithSymbol = function (message, match, withSymbols) {
+    if (!withSymbols) {
+        message = exports.replaceList(message, l.symbols, '')
+    }
     var array = message.toLowerCase().split(' ')
     for (var i = 0; i < array.length; i++) {
-        console.log(array[i] + " | " + match + (array[i] == match))
         if (array[i] == match) {
             return true
         }
@@ -20,27 +29,22 @@ module.exports.matchWordWithSymbols = function (message, match) {
 
 //returns true if a word is contained within. Ignores symbols
 module.exports.matchWord = function (message, match) {
-    return exports.matchWordWithSymbols(exports.replaceList(message, l.symbols, ''), match)
+    return exports.matchWordWithSymbol(message, match, false)
+}
+
+//returns true if a word matches any word in a list  
+module.exports.matchWordFromListWithSymbols = function (message, matches, withSymbols) {
+    for (var i = 0; i < matches.length; i++) {
+        if (exports.matchWordWithSymbol(message, matches[i], withSymbols)) {
+            return true
+        }
+    }
+    return false
 }
 
 //returns true if a word matches any word in a list  
 module.exports.matchWordFromList = function (message, matches) {
-    for (var i = 0; i < matches.length; i++) {
-        if (exports.matchWord(message, matches[i])) {
-            return true
-        }
-    }
-    return false
-}
-
-//returns true if a word matches any word in a list  
-module.exports.matchWordWithSymbolsFromList = function (message, matches) {
-    for (var i = 0; i < matches.length; i++) {
-        if (exports.matchWordWithSymbols(message, matches[i])) {
-            return true
-        }
-    }
-    return false
+    return exports.matchWordFromListWithSymbols(message, matches, false)
 }
 
 //Match any substring to input

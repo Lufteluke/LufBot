@@ -1,10 +1,11 @@
 const h = require('./helpers')
 const l = require('./wordLists')
 const ending = "ay"
-const noVowelCommand = "no" + vowelReplace + ending
 var vowelReplace = "v"
+const noVowelCommand = "no" + vowelReplace + ending
 
-module.exports.piglatinEncode = function (clean) {
+
+module.exports.encode = function (clean) {
 
     var words = chkCommand(
             clean.toLowerCase()
@@ -41,7 +42,7 @@ module.exports.piglatinEncode = function (clean) {
     return h.capitaliseFirst(out)
 }
 
-module.exports.piglatinDecode = function (clean) {
+module.exports.decode = function (clean) {
 
     var words = chkCommand(
             clean.toLowerCase()

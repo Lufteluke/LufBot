@@ -126,7 +126,7 @@ module.exports.subjects = [
     'the jews', 'scientologists', 'catholics', 'protestants', 'science', 'the spanish inquisition',
     //People
     'Steven Seagal', 'Obama', 'Hitler', 'Santa', 'that hot guy at school', 'that hot girl at school', 'Satan',
-    'LufBot', 'Todd Howard', 'your mom', 'you', 'Garfield', 'Jehova', 'Jesus', 'ShoeOnHead', 'I',
+    'LufBot', 'Todd Howard', 'your mom', 'you', 'Garfield', 'Jehova', 'Jesus', 'ShoeOnHead', 'I', '@Lufteluke',
     //Other
     'mondays', 'egg', 'horses', 'the birds', 'Foxyfluffs', 'no-one', 'everyone'
 ]

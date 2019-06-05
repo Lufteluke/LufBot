@@ -17,6 +17,7 @@ module.exports.asteriskAction = function (clean, from) { //todo get only center
         return '0w0 *' + clean + ' all over ' + from + '*'
     }
     return '*Confused*'
+    h.warn("Action failed")
 }
 
 module.exports.owo = function (clean) {
@@ -24,6 +25,7 @@ module.exports.owo = function (clean) {
 }
 
 module.exports.default = function (from) {
+    h.warn("Default response")
     return h.pickRandom(l.iDontUnderstand) + '. ' + h.pickRandom(l.doMe) + ', ' + from
 }
 
@@ -79,7 +81,7 @@ module.exports.randomFact = function (from) {
 }
 
 module.exports.about = function (from) {
-    return "LufBot V0.1 at your service, I was made to confuse. I'm open source and can be found at https://github.com/Lufteluke/LufBot \n Why were you made, " + from + '?'
+    return "LufBot V0.1 at your service, I was made by @Lufteluke to confuse. I'm open source and can be found at https://github.com/Lufteluke/LufBot \n Why were you made, " + from + '?'
 }
 
 module.exports.good = function (from) {

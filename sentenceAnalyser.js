@@ -44,7 +44,7 @@ function parser (message) {
   const commandWithName = split[0].toLowerCase()
   const command = commandWithName.split('@')[0] //because it might be /command@lufbot
   
-  if ((command !== null) && h.matchWordWithSymbolsFromList(command, c.commands.concat('/yiff'))) {
+  if ((command !== null) && h.matchWordFromListWithSymbols(command, c.commands.concat('/yiff'), true)) {
     clean = clean.replace(commandWithName, '') //we don't want the name
     
     console.log('Command: ' + command)
@@ -99,13 +99,14 @@ function parser (message) {
       return r.echoMsg(message)
 
       case '/latin':
-      return p.piglatinEncode(clean)
+      return p.encode(clean)
 
       case '/latindecode':
-      return p.piglatinDecode(clean)
+      return p.decode(clean)
 
       default:
       return "I don't know the command: " + command + ", but I should";
+      h.err("Command unknown")
     }
   }
   else {
