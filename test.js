@@ -31,22 +31,30 @@ var message = {
 }
 
 function change(string) {
-    console.log("The input is now \"" + string + "\"")
+    console.log("Input: \n    \"" + string + "\"")
     input = string
     message.text = string
 }
 
 function test(comment) {
     comment = comment.toUpperCase()
-    console.log(comment + " : \n\"" + sentenceAnalyser.parse(message) + "\"\n")
+    console.log(comment + ": \n    \"" + sentenceAnalyser.parse(message) + "\"\n")
 }
 
 function direct(comment, target) {
     comment = comment.toUpperCase()
     var a = h.capitaliseFirst(target(message.text)).trim()
     var b = h.capitaliseFirst(sentenceAnalyser.parse(message)).trim()
-    console.log("(direct) " + comment + " : \n\"" + a + ((a==b)? "\"\n":"\"") )
-    if (a!=b) h.warn("\n\"" + b + "\" \nNot identical to analyser! \n")
+    console.log("(direct) " + comment + ": \n    \"" + a + ((a==b)? "\"\n":"\"") )
+    if (a!=b) h.warn("\n    \"" + b + "\" \n    Not identical to analyser! \n")
+}
+
+function expect(comment, expected) {
+    comment = comment.toUpperCase()
+    var a = h.capitaliseFirst(sentenceAnalyser.parse(message)).trim()
+    console.log("(expect) " + comment + ": \n    \"" + a + "\"")
+    if (a==expected)h.succ("PASS \n")
+    else h.err("FAIL: expected: \"" + expected + "\"\n")
 }
 
 function type(comment) {
@@ -67,6 +75,7 @@ test("Help")
 
 change ("/owo what's this? Notices your code")
 test("OWO")
+expect("OWO", "what's this? notices yooow code")
 
 change ("/eight will you crash?")
 test("Eightball")
@@ -110,11 +119,11 @@ test("Norsk")
 change("/brainfuckencode abca")
 //change("/brainfuckencode a baÿ long")
 //change("/brainfuckencode " + b.brainfuck('+[,.]') + ' long')
-test("BF encode")
+test("Brainfuck encode")
 change("/brainfuck " + b.encode("abca"))
 //change("/brainfuck " + b.encode("abcaa baÿ long"))
 //change("/brainfuck " + b.encode(b.brainfuck('+[,.]') + ' long'))
-test("BF encode decoded")
+test("Brainfuck encode decoded")
 
 //change("/latin Hi, this is fancy speech from latin america")
 change("/latin Hi, this is fancy speech from latin america novay")
@@ -162,7 +171,7 @@ direct("BLEEP", r.beep)
 change ("Hello, Lufbot")
 test ("HELLO")
 
-direct("DEFAULT", r.default)
+//direct("DEFAULT", r.default)
 
 change("fact me")
 //direct("FACT", r.fact)

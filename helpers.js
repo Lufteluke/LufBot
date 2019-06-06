@@ -9,8 +9,11 @@ module.exports.substringMatch = function (message, match) {
 module.exports.warn = function (string){
     console.warn("\x1b[43m\x1b[30mWARN: " + string, "\x1b[0m")
 }
-module.exports.error = function (string){
-    console.err("\x1b[43m\x1b[30mWARN: " + string, "\x1b[0m")
+module.exports.err = function (string){
+    console.error("\x1b[41mERR: " + string, "\x1b[0m")
+}
+module.exports.succ = function (string){
+    console.log("\x1b[42mSUCC: " + string, "\x1b[0m")
 }
 
 //returns true if a word is contained within.
