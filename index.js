@@ -5,7 +5,7 @@ var bodyParser = require('body-parser')
 var sentenceAnalyser = require('./sentenceAnalyser')
 
 var app = express()
-var port = process.env.PORT || 1337;
+var port = process.env.PORT || 1337
 const telegramApiKey = process.env.TELEGRAM_API_KEY || 'bot123456789:ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const apiUrl = 'https://api.telegram.org/bot' + telegramApiKey
 

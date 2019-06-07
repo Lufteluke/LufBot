@@ -1,13 +1,16 @@
 const l = require('./wordLists')
 
 module.exports.warn = function (string){
-    console.warn("\x1b[43m\x1b[30mWARN: " + string, "\x1b[0m")
+    console.warn(l.style.txt.black + l.style.bg.yellow +"WARN: " + string + l.style.reset)
 }
 module.exports.err = function (string){
-    console.error("\x1b[41mERR: " + string, "\x1b[0m")
+    console.error(l.style.bg.red + l.style.underline + l.style.txt.yellow + "ERROR: " + string + l.style.reset)
 }
 module.exports.succ = function (string){
-    console.log("\x1b[42mSUCC: " + string, "\x1b[0m")
+    console.log(l.style.txt.green + "✔ " + string + l.style.reset)
+}
+module.exports.info = function (string){
+    console.log(l.style.txt.black + l.style.bold + l.style.underline + l.style.bg.white + string + l.style.reset)
 }
 
 //returns true if a word is contained within.
@@ -55,10 +58,18 @@ module.exports.matchChar = function (char, array) {
     return false
 }
 
-//match substring to string
-module.exports.substringMatch = function (message, match) {
-    //console.log(message + ' ?= ' + match)
+//match substring to string, option to use case sensitive
+module.exports.substringMatchCase = function (message, match, caseSensitive) {
+    if (!caseSensitive) {
+        message = message.toLowerCase()
+        match = match.toLowerCase()
+    }
     return (message.includes(match))
+}
+
+//match substring to string, case sensitive
+module.exports.substringMatch = function (message, match) {
+    return exports.substringMatchCase(message, match, true)
 }
 
 //Match any substring to input
@@ -158,3 +169,6 @@ module.exports.encodeToCharCodeArrayString = function (string) {
     return JSON.stringify(arr)
 }
 
+//strips a string of command and makes lower case
+module.exports.clean = function (string) {
+}

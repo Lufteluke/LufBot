@@ -1,15 +1,15 @@
 const h = require('./helpers')
 const l = require('./wordLists')
 const ending = "ay"
-var vowelReplace = "v"
+const vowelReplace = "v"
 const noVowelCommand = "no" + vowelReplace + ending
 
 
 module.exports.encode = function (clean) {
 
-    var words = chkCommand(
-            clean.toLowerCase()
-        ).split(' ')
+    var words =  chkCommand(clean.toLowerCase())
+    var vowRep = (words.length==clean.length)? vowelReplace : ""
+    words = words.split(' ')
     var out = ""
 
     words.forEach(word => {
@@ -37,16 +37,15 @@ module.exports.encode = function (clean) {
             }   
             else break         
         }
-        out += remainder + leadingConsonants + ((leadingConsonants.length==0)? vowelReplace : "") + ending + symbols + " "
+        out += remainder + leadingConsonants + ((leadingConsonants.length==0)? vowRep : "") + ending + symbols + " "
     });
     return h.capitaliseFirst(out)
 }
 
 module.exports.decode = function (clean) {
-
-    var words = chkCommand(
-            clean.toLowerCase()
-        ).split(' ')
+    var words =  chkCommand(clean.toLowerCase())
+    var vowRep = (words.length==clean.length)? vowelReplace : ""
+    words = words.split(' ')
     var out = ""
     
     words.forEach(word => {
@@ -66,7 +65,7 @@ module.exports.decode = function (clean) {
             }
             else if (h.isConsonant(lastLetter)) {//move consonant
                 remainder = remainder.slice(0, -1)
-                if (lastLetter == vowelReplace) break
+                if (lastLetter == vowRep) break
                 leadingConsonants = lastLetter + leadingConsonants
                 break
             }
@@ -79,9 +78,7 @@ module.exports.decode = function (clean) {
 
 function chkCommand (clean) {
     if (h.matchWord(clean, noVowelCommand)){
-        vowelReplace = ""
         clean = h.replace(clean, noVowelCommand, "")
     }
-    else vowelReplace = "v"
     return clean
 }

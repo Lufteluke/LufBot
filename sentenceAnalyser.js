@@ -41,7 +41,7 @@ function parser (message) {
 
   var clean = text.toLowerCase()
   const split  = clean.split(' ')
-  const commandWithName = split[0].toLowerCase()
+  const commandWithName = split[0]
   const command = commandWithName.split('@')[0] //because it might be /command@lufbot
   
   if ((command !== null) && h.matchWordFromListWithSymbols(command, c.commands.concat('/yiff'), true)) {

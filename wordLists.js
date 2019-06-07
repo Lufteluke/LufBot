@@ -244,3 +244,56 @@ module.exports.lufCompounds = [
 ]
 
 module.exports.navy = "What the fuck did you just fucking say about me, you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I\'m the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little \"clever\" comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn't, you didn't, and now you're paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You're fucking dead, kiddo."
+
+function stylise(int) {
+    return ("\x1b[" + int + "m")
+}
+
+module.exports.style = {
+    "reset":            stylise(0),
+    "bold":             stylise(1),
+    "underline":        stylise(4),
+    "blink":            stylise(5),
+    "boldOff":          stylise(21),
+    "underlineOff":     stylise(24),
+    "blinkOff":         stylise(25),
+
+    "txt":{
+        "black":        stylise(30),
+        "red":          stylise(31),
+        "green":        stylise(32),
+        "yellow":       stylise(33),
+        "blue":         stylise(34),
+        "magenta":      stylise(35),
+        "cyan":         stylise(36),
+        "white":        stylise(37),
+        "default":      stylise(39),
+        "lightGrey":    stylise(90),
+        "lightRed":     stylise(91),
+        "lightGreen":   stylise(92),
+        "lightYellow":  stylise(93),
+        "lightBlue":    stylise(94),
+        "lightMagenta": stylise(95),
+        "lightCyan":    stylise(96),
+        "lightWhite":   stylise(97)
+    },
+    "bg":{
+        "black":        stylise(40),
+        "red":          stylise(41),
+        "green":        stylise(42),
+        "yellow":       stylise(43),
+        "blue":         stylise(44),
+        "magenta":      stylise(45),
+        "cyan":         stylise(46),
+        "white":        stylise(47),
+        "default":      stylise(49),
+        "lightGrey":    stylise(100),
+        "lightRed":     stylise(101),
+        "lightGreen":   stylise(102),
+        "lightYellow":  stylise(103),
+        "lightBlue":    stylise(104),
+        "lightMagenta": stylise(105),
+        "lightCyan":    stylise(106),
+        "lightWhite":   stylise(107)
+    }
+}

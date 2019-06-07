@@ -290,7 +290,6 @@ module.exports.encode = function (stringInput) {
         //update current cell
         currentCell = charcode
     });
-    console.log(output)
     return output
 
 
