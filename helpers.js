@@ -1,11 +1,5 @@
 const l = require('./wordLists')
 
-//match substring to string
-module.exports.substringMatch = function (message, match) {
-    //console.log(message + ' ?= ' + match)
-    return (message.includes(match))
-}
-
 module.exports.warn = function (string){
     console.warn("\x1b[43m\x1b[30mWARN: " + string, "\x1b[0m")
 }
@@ -48,6 +42,23 @@ module.exports.matchWordFromListWithSymbols = function (message, matches, withSy
 //returns true if a word matches any word in a list  
 module.exports.matchWordFromList = function (message, matches) {
     return exports.matchWordFromListWithSymbols(message, matches, false)
+}
+
+//returns true if a letter is in an array
+module.exports.matchChar = function (char, array) {
+    char = char.toLowerCase()
+    for (i = 0; i < array.length; i++) {
+        if (char == array[i]){
+            return true
+        }
+    }
+    return false
+}
+
+//match substring to string
+module.exports.substringMatch = function (message, match) {
+    //console.log(message + ' ?= ' + match)
+    return (message.includes(match))
 }
 
 //Match any substring to input
@@ -116,17 +127,6 @@ module.exports.capitalise = function (string) {
 }
 
 //returns true if a letter is a consonant
-module.exports.matchChar = function (char, array) {
-    char = char.toLowerCase()
-    for (i = 0; i < array.length; i++) {
-        if (char === array[i]){
-            return true
-        }
-    }
-    return false
-}
-
-//returns true if a letter is a consonant
 module.exports.isConsonant = function (char) {
     return exports.matchChar(char, l.consonants)
 }
@@ -149,13 +149,12 @@ module.exports.coinflip = function (againstOne) {
     else return false
 }
 
-//converts a string into a string representation of charcodes. It's required, I promise
-module.exports.encode = function (string) {
-    var output = "["
+//converts a string into a string representation of charcodes.
+module.exports.encodeToCharCodeArrayString = function (string) {
     var arr = string.split('')
-    while (arr.length !== 0) {
-        output += arr.pop().charCodeAt() + ((arr.length !== 0) ? ',' : ']')
+    for(i = 0; i < arr.length; i++){
+        arr[i] = arr[i].charCodeAt(0)
     }
-    return output
+    return JSON.stringify(arr)
 }
 
