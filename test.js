@@ -109,8 +109,6 @@ test("Bork")
 change ("/norsk I always try to speak Norwegian when I code")
 expect("Norsk", "norweqian")
 
-
-
 //change("/brainfuckencode a baÿ long")
 //change("/brainfuckencode " + b.brainfuck('+[,.]') + ' long')
 change("/brainfuckencode abca")
@@ -132,8 +130,6 @@ expect("Brainfuck encode", "<<+++++[>++++++<-]>++.>>++++++++[<++++++++++++>-]<+.
 //change("/brainfuck " + b.encode(b.brainfuck('+[,.]') + ' long'))
 change("/brainfuck " + b.encode("abca"))
 expect("Brainfuck encode decoded", "abca")
-
-
 
 change("/latin Hi, this is fancy speech from latin america")
 expect("Latinpig", "americavay")

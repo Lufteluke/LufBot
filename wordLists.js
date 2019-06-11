@@ -155,7 +155,7 @@ module.exports.objects = [ //add all subjects
 
 module.exports.modifiers = [
     //adverb
-    ', intensively', ', but not really', '. Yes, really', ', literally', 
+    ', intensively', ', but not really', '. Yes, really', ', literally', ", probably", ", trust me",
     //while
     'while drunk', 'while on drugs', 'while standing on one leg',
     //time

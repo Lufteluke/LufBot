@@ -7,17 +7,15 @@ module.exports.asteriskAction = function (clean, from) { //todo get only center
     if (h.matchWord(clean, 'you')) {
         return '*' + clean + ' back!~*'
     }
-    else if (h.matchWordFromList(clean, l.names)) {
-        l.names.forEach(name => {
-            clean = clean.replace(name, from)
-            return '*' + clean + '*'
-        });
-    }
     else {
+        for (i = 0; i < l.names.length; i++){
+            if (h.matchWord(clean, l.names[i])){
+                clean = clean.replace(l.names[i], from)
+                return '*' + clean + '*'
+            }
+        }
         return '0w0 *' + clean + ' all over ' + from + '*'
     }
-    return '*Confused*'
-    h.warn("Action failed")
 }
 
 module.exports.owo = function (clean) {
@@ -38,14 +36,16 @@ module.exports.who = function (clean, from) {
 }
 
 module.exports.beep = function (clean) {
-    clean = h.replace(clean, 'ee', 'ᛟ')
-    clean = h.replace(clean, 'oo', 'ee')
-    return h.replace(clean, 'ᛟ', 'oo')
+    return h.replace(
+            h.replace(
+                h.replace(clean, 'ee', 'ᛟ')
+                , 'oo', 'ee')
+            , 'ᛟ', 'oo')
 }
 
 module.exports.fake = function (clean) {
     if (!h.matchWord(clean, 'fake')) {
-        return h.replace(clean, 'gay', 'fake and gay')
+        return h.replace(clean, 'gay', 'gay and fake')
     }
     else if (!h.matchWord(clean, 'gay')) {
         return h.replace(clean, 'fake', 'fake and gay')
