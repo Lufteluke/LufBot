@@ -75,21 +75,21 @@ module.exports.substringMatch = function (message, match) {
 //Match any substring to input
 module.exports.substringMatchAny = function (message, array) {
     if (array.length === 0) return true
-    array.forEach(element => {
-        if (exports.substringMatch(message, element)) {
+    for (i = 0; i < array.length; i++) {
+        if (exports.substringMatch(message, array[i])) {
             return true
         }
-    });
+    }
     return false
 }
 
 //Match all of the input
 module.exports.substringMatchAll = function (message, array) {
-    array.forEach(element => {
-        if (!exports.substringMatch(message, element)) {
+    for (i = 0; i < array.length; i++){
+        if (!exports.substringMatch(message, array[i])) {
             return false
         }
-    });
+    }
     return true
 }
 

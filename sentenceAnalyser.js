@@ -4,6 +4,7 @@ const r = require('./replies')
 const c = require('./commands')
 const b = require('./brainfuck')
 const p = require('./piglatin')
+const m = require('./memory')
 
 //Finishing touches on string
 module.exports.parse = function (message) {
@@ -43,6 +44,8 @@ function parser (message) {
   const split  = clean.split(' ')
   const commandWithName = split[0]
   const command = commandWithName.split('@')[0] //because it might be /command@lufbot
+
+  m.logIfSaved(message)
   
   if ((command !== null) && h.matchWordFromListWithSymbols(command, c.commands.concat('/yiff'), true)) {
     clean = clean.replace(commandWithName, '') //we don't want the name
@@ -103,6 +106,12 @@ function parser (message) {
 
       case '/latindecode':
       return p.decode(clean)
+
+      case '/remember':
+      return m.remember(message)
+
+      case '/forget':
+      return m.forget(message)
 
       default:
       return "I don't know the command: " + command + ", but I should";

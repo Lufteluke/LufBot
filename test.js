@@ -4,37 +4,15 @@ const h = require('./helpers')
 const p = require('./piglatin')
 const c = require('./commands')
 const l = require('./wordLists')
+const d = require('./dataTypes')
 const sentenceAnalyser = require('./sentenceAnalyser')
 
 const from = "TestBot"
-var input = "test"
-
-var message = {
-    "message_id":0000,
-    "from":{
-        "id":0000000,
-        "is_bot":false,
-        "first_name":from,
-        "username":"TESTBOT",
-        "language_code":"en"
-    },
-    "chat":{
-        "id":-000000000,
-        "title":"GROUPNAME",
-        "type":"group",
-        "all_members_are_administrators":false
-    },
-    "date":0000000000,
-    "text":input,
-    "entities":[
-        {"offset":0,"length":5,"type":"bot_command"}
-    ]
-}
+var message = new d.Message("test")
 
 function change(string) {
     console.log("Input: \n    \"" + string + "\"")
-    input = string
-    message.text = string
+    message = new d.Message(string)
 }
 
 function test(comment) {
@@ -166,34 +144,43 @@ expect("Navyborkowonorsk", "yoooo")
 type("Speech")
 
 change ("*hugs lufbot*")
-expect("ACTION", "hugs")
+expect("Action", "hugs")
 
 change ("*hugs bot*")
-expect("ACTION", "hugs")
+expect("Action", "hugs")
 
 change ("*hugs you*")
-expect("ACTION", "back")
+expect("Action", "back")
 
 change("good bot")
-expect("GOOD", "Likewise")
+expect("Good", "Likewise")
 
 change("bad bot")
-expect("BAD", "I'm sorry")
+expect("Bad", "I'm sorry")
 
 change ('bleep boop bleep')
-direct("BLEEP", r.beep)
+direct("Bleep", r.beep)
 
 change ("Hello, Lufbot")
-expect ("HELLO", "testbot, ")
+expect ("Hello", "testbot, ")
 
 change("fact me")
 //direct("FACT", r.fact)
-test("FACT")
+test("Fact")
 
 //change ("fake")
 //change ("gay")
 change ("fake and gay")
-direct("FAKE", r.fake)
+direct("Fake", r.fake)
 
 change("hello, I love your code")
 expect("OWO", "love testbot")
+
+change("/forget about it")
+expect("Forget", "ripped")
+change("/remember me?")
+expect("Remember", "I will now")
+change("/remember the last message?")
+expect("Remember", "/remember me?")
+change("/remember all the good times?")
+expect("Remember", "/remember me?")

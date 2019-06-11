@@ -10,7 +10,6 @@ const telegramApiKey = process.env.TELEGRAM_API_KEY || 'bot123456789:ABCDEFGHIJK
 const apiUrl = 'https://api.telegram.org/bot' + telegramApiKey
 
 
-
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
@@ -19,20 +18,18 @@ app.use(
 )
 
 
-
 //GET!
 app.post('/new-message', function(req, res) {
   const {message} = req.body
 
   if (!message || !message.text) {
-    console.log('Empty msg!')
+    h.warn('Empty msg!')
     return res.end()
   }
  
   var reply = sentenceAnalyser.parse(message)
   postString(reply, message, res)  
 })
-
 
 
 //POST!
@@ -51,10 +48,11 @@ function postString (reply, message, res) {
   })
 
   .catch(err => {
-    console.log('Error: ' + err)
+    h.err('Error: ' + err)
     res.end('Error: ' + err)
   })
 }
+
 
 const l = require('./wordLists')
 const h = require('./helpers')
@@ -63,5 +61,5 @@ const c = require('./commands')
 
 //START!
 app.listen(port, function() {
-  console.log('LufBot listening on port ' + port)
+  h.info('LufBot listening on port ' + port)
 })
