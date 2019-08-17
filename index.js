@@ -2,7 +2,6 @@
 
 //Imports
 const axios = require('axios')
-const h = require('./helpers')
 var express = require('express')
 var bodyParser = require('body-parser')
 var sentenceAnalyser = require('./sentenceAnalyser')
@@ -65,6 +64,8 @@ function postString (reply, message, res) {
     res.end('Error: ' + err)
   })
 }
+
+const h = require('./helpers')
 
 //START!
 app.listen(port, function() {
