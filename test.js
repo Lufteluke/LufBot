@@ -1,3 +1,8 @@
+/* A playground for testing functionality. 
+Please write tests for all new features and leave them in. 
+If they take a lot of space or cpu-time, leave them, but commented out
+*/
+
 const r = require('./replies')
 const b = require('./brainfuck')
 const h = require('./helpers')
@@ -10,16 +15,27 @@ const sentenceAnalyser = require('./sentenceAnalyser')
 const from = "TestBot"
 var message = new d.Message("test")
 
+//Quality of life function to change the input string
 function change(string) {
     console.log("Input: \n    \"" + string + "\"")
     message = new d.Message(string)
 }
 
+/*
+Has no fail condition, will simply output the text. 
+Please use it over console log for formatting reasons.
+Text will be purple for easy recognition.
+*/
 function test(comment) {
     comment = comment.toUpperCase()
     console.log(l.style.txt.magenta + comment + ": \n    \"" + sentenceAnalyser.parse(message) + "\"" + l.style.reset + "\n")
 }
 
+/* 
+Will directly target a function you supply and compare it to the free text. Good for testing tergeting.
+Will trim and make lower case for compare.
+Can't be used for things with random elements or fuzzylogic.
+*/
 function direct(comment, target) {
     comment = comment.toUpperCase()
     var a = target(message.text).trim()
@@ -32,6 +48,9 @@ function direct(comment, target) {
     console.log("")//\n
 }
 
+/* Will check the response to an input and expect to see the substring you provide against it.
+    "Hi how are you" will be match with "how are" as expected and pass
+*/
 function expect(comment, expected) {
     comment = comment.toUpperCase()
     var a = sentenceAnalyser.parse(message).trim()
@@ -43,6 +62,7 @@ function expect(comment, expected) {
     console.log("")//\n
 }
 
+//will make a small headline
 function type(comment) {
     h.info("\n______________ " + comment.toUpperCase() + " ______________")
     console.log("")

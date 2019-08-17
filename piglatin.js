@@ -1,3 +1,7 @@
+/*
+Translates to and from pig latin, keep in mind this is fundamentally lossy
+*/
+
 const h = require('./helpers')
 const l = require('./wordLists')
 const ending = "ay"

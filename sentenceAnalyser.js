@@ -1,3 +1,11 @@
+/*
+Takes the message and strips various parts down. 
+It detects if any of the command are present and triggers on certain strings. 
+Depending on the command or text recognised, it may forward the message to replies 
+or directly to the more complex scripts. 
+It returns the result back to index which sends it to the user.
+*/
+
 const l = require('./wordLists')
 const h = require('./helpers')
 const r = require('./replies')
@@ -9,6 +17,7 @@ const m = require('./memory')
 //Finishing touches on string
 module.exports.parse = function (message) {
   
+  // this is basically the whole reply
   var returnVar = parser(message)
   
   //empty string catch
@@ -36,6 +45,7 @@ module.exports.parse = function (message) {
   return h.capitaliseFirst(returnVar)
 }
 
+//parse message to find which reply function to use
 function parser (message) {
   const {first_name} = message.from
   const {text} = message
@@ -47,9 +57,11 @@ function parser (message) {
 
   m.logIfSaved(message)
   
-  if ((command !== null) && h.matchWordFromListWithSymbols(command, c.commands.concat('/yiff'), true)) {
+  //if command is in list
+  if ((command !== null) && h.matchWordFromListWithSymbols(command, c.commands.concat(c.secretCommands), true)) {
     clean = clean.replace(commandWithName, '') //we don't want the name
     
+    //find actual command
     console.log('Command: ' + command)
     
     switch (command) {
@@ -114,8 +126,8 @@ function parser (message) {
       return m.forget(message)
 
       default:
+      h.err("Command unknown: " + command)
       return "I don't know the command: " + command + ", but I should";
-      h.err("Command unknown")
     }
   }
   else {

@@ -1,3 +1,8 @@
+/*
+Contains a collection of words and sentences that are used for replies and text recognition. 
+Also used for general text based storage
+*/
+
 const h = require('./helpers')
 
 module.exports.facts = [

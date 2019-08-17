@@ -1,3 +1,7 @@
+/*
+Simple (conceptually and/or codewise) replies goes here
+*/
+
 const l = require('./wordLists')
 const h = require('./helpers')
 const c = require('./commands')

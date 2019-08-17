@@ -1,7 +1,12 @@
+/*
+Prototype for remembeering interactions beyond single messages, expect big changes here
+*/
+
 const h = require('./helpers')
 const d = require('./dataTypes')
 
 var userList = [new d.User(new d.Message(""))]
+const maxUsers = 100
 
 module.exports.remember = function(message) {
     for (i = 0; i < userList.length; i++) {
@@ -19,10 +24,10 @@ module.exports.remember = function(message) {
         }
     }
     
-    if (userList.length >= 100) {
+    if (userList.length >= maxUsers) {
         userList.shift()
     }
-    
+
     userList.push(new d.User(message))
     return "I don't remmeber you, I will now, at least until I restart"
 }

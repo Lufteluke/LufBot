@@ -1,3 +1,5 @@
+//Encodes to and from brainfuck. Comment back in log statements for debug. 
+
 const h = require('./helpers')
 
 module.exports.brainfuck = function (program) {

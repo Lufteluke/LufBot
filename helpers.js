@@ -1,3 +1,9 @@
+/*
+Contain helper classes that help unify the way that searches and certain fucntions are done (such as logging).
+Many of the functions are redundant, but they're there for ease of changing and future optimisation. 
+Please use them, even if there are simple replacements.
+*/
+
 const l = require('./wordLists')
 
 module.exports.warn = function (string){

@@ -1,9 +1,10 @@
+//Complex data structures and objects go here
+
 module.exports.User = function (message) {
     this.name = message.from.username
     this.dateMet = new Date()
     this.messages = [message]
 }
-
 
 exports.User.prototype.getLastMessage = function (){
     return this.messages[this.messages.length-2]
@@ -23,6 +24,9 @@ exports.User.prototype.getAllMessages = function (){
 
 exports.User.prototype.logMessage = function (message){
     this.messages.push(message)
+    if (this.messages.length >= 100) {
+        this.messages.shift()
+    }
 }
 
 module.exports.Message = function (text) {
