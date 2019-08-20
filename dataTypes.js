@@ -15,7 +15,7 @@ exports.User.prototype.getFirstMessage = function (){
 }
 
 exports.User.prototype.getAllMessages = function (){
-    var out
+    var out = ""
     this.messages.forEach(msg => {
         out += msg.text + "\n\n"
     });
