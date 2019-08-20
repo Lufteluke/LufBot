@@ -33,10 +33,11 @@ module.exports.default = function (from) {
 
 module.exports.who = function (clean, from) {
     const doer = h.pickRandom(l.subjects.concat(from))
-    if (!h.matchWord('who')) {
-        return doer + clean.replace('?', '!')
-    }
-    else return clean.replace('who', doer).replace('?', '!')
+
+    //you / me & ?/!
+    clean.replace("you", "ᛟ").replace("me", "you").replace("ᛟ", "me").replace('?', '!')
+
+    return (h.matchWord('who') ? clean.replace('who', doer) :  doer + clean)
 }
 
 module.exports.beep = function (clean) {
