@@ -39,7 +39,7 @@ module.exports.who = function (clean, from) {
             clean = h.swap(clean, pair[0], pair[1])
         }
     });
-    return (h.matchWord('who') ? clean.replace('who', doer) :  doer + clean).replace('?', '!')
+    return h.replace(clean, "?", "!")
 }
 
 module.exports.beep = function (clean) {
