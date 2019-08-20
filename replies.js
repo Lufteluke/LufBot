@@ -35,7 +35,7 @@ module.exports.who = function (clean, from) {
     const doer = h.pickRandom(l.subjects.concat(from))
 
     //you / me & ?/!
-    clean.replace("you", "ᛟ").replace("me", "you").replace("ᛟ", "me").replace('?', '!')
+    clean = clean.replace("you", "ᛟ").replace("me", "you").replace("ᛟ", "me").replace('?', '!')
 
     return (h.matchWord('who') ? clean.replace('who', doer) :  doer + clean)
 }
