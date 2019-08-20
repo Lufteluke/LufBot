@@ -115,6 +115,8 @@ function borkConstructor() {
 
 module.exports.names = ['lufbot', 'bot']
 
+module.exports.wordSwaps = [["yours", "mine"],["your", "my"],["you", "me"]]
+
 module.exports.subjects = [
     //Conspiracy
     'aliens', 'chemtrails', 'illuminati', 'gay frogs', 'the military industrial complex', 'I don\'t know who',

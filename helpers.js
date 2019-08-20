@@ -132,6 +132,14 @@ module.exports.replaceList = function (clean, allInList, withText) {
     return clean
 }
 
+//swaps two substrings, a will replace b, b will replace a
+module.exports.swap = function (clean, a, b) {
+    clean = exports.replace(clean, a, 'ᛟ')
+    clean = exports.replace(clean, b, a)
+    clean = exports.replace(clean, 'ᛟ', b)
+    return clean
+}
+
 //capitalises first letter in the first word
 module.exports.capitaliseFirst = function (string) {
     if (string.charAt(0) === null) return string

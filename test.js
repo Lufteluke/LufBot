@@ -106,6 +106,10 @@ test("Fact")
 
 change ("/who made lufbot?")
 expect("Who", "made lufbot")
+change("/who killed mine?")
+expect("Who", "yours")
+change("/who killed your dog?")
+expect("Who", "my")
 
 change ("/navy")
 expect("NAVY", "what the fuck")
@@ -219,6 +223,9 @@ change("/remember the last message?")
 expect("Remember", "/remember me?")
 change("/remember all the good times?")
 expect("Remember", "/remember me?")
+
+
+
 
 //Always leave at the bottom
 if (passed) {
