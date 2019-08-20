@@ -125,6 +125,12 @@ function parser (message) {
       case '/forget':
       return m.forget(message)
 
+      case '/shrug':
+      return "¯\\_(ツ)_/¯"
+
+      case '/secrets':
+      return r.secrets()
+
       default:
       h.err("Command unknown: " + command)
       return "I don't know the command: " + command + ", but I should";

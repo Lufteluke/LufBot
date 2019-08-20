@@ -1,5 +1,8 @@
 # Lufbot
 
+#### Lufbot is a Telegram messenger bot that runs in Node. It's mostly useless and for fun, serving as entertainment and coding excersise in our chat. He could be useful as a platform from which to make useful bots or features, however.
+
+
 ## Environment
 
 * Lufbot runs in `node 8.11.1`, using `npm 6.4.1`, other things might work, but I haven't tested

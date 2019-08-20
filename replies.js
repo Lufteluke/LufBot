@@ -101,7 +101,15 @@ module.exports.help = function () {
     c.commands.forEach(command => {
         returnVar += command + ' - '
     });
-    return 'LufBot responds to these commands: ' + returnVar
+    return 'LufBot responds to these commands: ' + returnVar.slice(0, -3)
+}
+
+module.exports.secrets = function () {
+    var returnVar = ''
+    c.secretCommands.forEach(command => {
+        returnVar += command + ' - '
+    });
+    return 'LufBot responds to these commands too: ' + returnVar.slice(0, -3)
 }
 
 module.exports.yiff = function (clean) {

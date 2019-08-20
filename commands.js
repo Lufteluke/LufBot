@@ -5,7 +5,7 @@ module.exports.commands = ['/talk', '/owo', '/eight', '/music', '/conspiracy', '
 '/who', '/navy', '/bork', '/norsk', '/brainfuck', '/brainfuckencode', '/echo', '/latin', '/latindecode', '/remember', '/forget']
 
 //Won't be shown with /help
-module.exports.secretCommands = ['/yiff']
+module.exports.secretCommands = ['/yiff', '/shrug', '/secrets']
 
 
 

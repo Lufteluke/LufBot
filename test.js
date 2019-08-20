@@ -14,6 +14,7 @@ const sentenceAnalyser = require('./sentenceAnalyser')
 
 const from = "TestBot"
 var message = new d.Message("test")
+var passed = true
 
 //Quality of life function to change the input string
 function change(string) {
@@ -43,7 +44,10 @@ function direct(comment, target) {
     var match = (h.substringMatchCase(a, b, false))
     
     console.log("(direct) " + comment + ": \n    \"" + a + "\"")
-    if (!match) h.warn("\n    \"" + b + "\" \n    Sentence analyser does not match direct call!")
+    if (!match){
+        h.warn("\n    \"" + b + "\" \n    Sentence analyser does not match direct call!")
+        passed = false
+    } 
     else h.succ("Pass")
     console.log("")//\n
 }
@@ -58,7 +62,10 @@ function expect(comment, expected) {
 
     console.log("(expect) " + comment + ": \n    \"" + a + "\"")
     if (match)h.succ("Pass")
-    else h.err("Expected: \"" + expected + "\"")
+    else {
+        h.err("Expected: \"" + expected + "\"")
+        passed = false
+    } 
     console.log("")//\n
 }
 
@@ -67,6 +74,8 @@ function type(comment) {
     h.info("\n______________ " + comment.toUpperCase() + " ______________")
     console.log("")
 }
+
+passed = true
 
 //______________ COMMANDS ______________
 type("Commands")
@@ -139,6 +148,12 @@ expect("Latinpig", "america")
 change("/latindecode novay " + p.encode("Hi, this is fancy speech from latin america novay"))
 expect("Latinpig novay", "america")
 
+change("/secrets")
+expect("Secrets", "/yiff")
+
+change("/shrug")
+expect("Shrug", "¯\\_(ツ)_/¯")
+
 change("/yiff in hell")
 expect("YIFF", "/yiff@e621bot")
 
@@ -204,3 +219,11 @@ change("/remember the last message?")
 expect("Remember", "/remember me?")
 change("/remember all the good times?")
 expect("Remember", "/remember me?")
+
+//Always leave at the bottom
+if (passed) {
+    h.succ("All tests passed!")
+}
+else {
+    h.err("Some tests failed!")
+}
