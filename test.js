@@ -219,6 +219,8 @@ change("/remember the last message?")
 expect("Remember", "/remember me?")
 change("/remember all the good times?")
 expect("Remember", "/remember me?")
+change("/remember")
+test("Remember")
 
 //Always leave at the bottom
 if (passed) {

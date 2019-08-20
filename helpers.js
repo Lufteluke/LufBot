@@ -81,7 +81,7 @@ module.exports.substringMatch = function (message, match) {
 //Match any substring to input
 module.exports.substringMatchAny = function (message, array) {
     if (array.length === 0) return true
-    for (i = 0; i < array.length; i++) {
+    for (var i = 0; i < array.length; i++) {
         if (exports.substringMatch(message, array[i])) {
             return true
         }
@@ -91,7 +91,7 @@ module.exports.substringMatchAny = function (message, array) {
 
 //Match all of the input
 module.exports.substringMatchAll = function (message, array) {
-    for (i = 0; i < array.length; i++){
+    for (var i = 0; i < array.length; i++){
         if (!exports.substringMatch(message, array[i])) {
             return false
         }
@@ -169,7 +169,7 @@ module.exports.coinflip = function (againstOne) {
 //converts a string into a string representation of charcodes.
 module.exports.encodeToCharCodeArrayString = function (string) {
     var arr = string.split('')
-    for(i = 0; i < arr.length; i++){
+    for(var i = 0; i < arr.length; i++){
         arr[i] = arr[i].charCodeAt(0)
     }
     return JSON.stringify(arr)
