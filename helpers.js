@@ -6,16 +6,16 @@ Please use them, even if there are simple replacements.
 
 const l = require('./wordLists')
 
-module.exports.warn = function (string){
-    console.warn(l.style.txt.black + l.style.bg.yellow +"WARN: " + string + l.style.reset)
+module.exports.warn = function (string) {
+    console.warn(l.style.txt.black + l.style.bg.yellow + "WARN: " + string + l.style.reset)
 }
-module.exports.err = function (string){
+module.exports.err = function (string) {
     console.error(l.style.bg.red + l.style.underline + l.style.txt.yellow + "ERROR: " + string + l.style.reset)
 }
-module.exports.succ = function (string){
+module.exports.succ = function (string) {
     console.log(l.style.txt.green + "✔ " + string + l.style.reset)
 }
-module.exports.info = function (string){
+module.exports.info = function (string) {
     console.log(l.style.txt.black + l.style.bold + l.style.underline + l.style.bg.white + string + l.style.reset)
 }
 
@@ -57,7 +57,7 @@ module.exports.matchWordFromList = function (message, matches) {
 module.exports.matchChar = function (char, array) {
     char = char.toLowerCase()
     for (i = 0; i < array.length; i++) {
-        if (char == array[i]){
+        if (char == array[i]) {
             return true
         }
     }
@@ -91,7 +91,7 @@ module.exports.substringMatchAny = function (message, array) {
 
 //Match all of the input
 module.exports.substringMatchAll = function (message, array) {
-    for (var i = 0; i < array.length; i++){
+    for (var i = 0; i < array.length; i++) {
         if (!exports.substringMatch(message, array[i])) {
             return false
         }
@@ -104,7 +104,7 @@ module.exports.substringMatchInOrder = function (message, array) {
     var index = -1
     var current = -1
 
-    for (i = 0; i < array.length; i++){
+    for (i = 0; i < array.length; i++) {
         current = message.indexOf(array[i], (index + 1))
         if (current == -1) {
             return false
@@ -119,10 +119,40 @@ module.exports.pickRandom = function (array) {
     return array[Math.floor(Math.random() * array.length)]
 }
 
+//replaces whole words, no substings. Case sensitive
+module.exports.replaceWordWithSymbols = function (clean, word, withWord, withSymbols) {
+    
+    if (!withSymbols) {
+        clean = exports.replaceList(clean, l.symbols, '')
+    }
+
+    var array = clean.toLowerCase().split(' ')
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] == word) {
+            array[i] = withWord
+        }
+    }
+    return array.join(' ')
+}
+
+//replaces whole words, no substings
+module.exports.replaceWord = function (clean, word, withWord) {
+    return exports.replaceWordWithSymbols(clean, word, withWord, false)
+}
+
+//swaps whole words, no substings
+module.exports.swapWords = function (clean, a, b) {
+    clean = exports.replaceWord(clean, a, 'ᛟ')
+    clean = exports.replaceWord(clean, b, a)
+    clean = exports.replaceWord(clean, 'ᛟ', b)
+    return clean
+}
+
 //replaces all words in a string with another string. Case sensitive
 module.exports.replace = function (clean, allText, withText) {
     return clean.split(allText).join(withText)
 }
+
 
 //same as replace, but for all items in a list. Case sensitive
 module.exports.replaceList = function (clean, allInList, withText) {
@@ -177,7 +207,7 @@ module.exports.coinflip = function (againstOne) {
 //converts a string into a string representation of charcodes.
 module.exports.encodeToCharCodeArrayString = function (string) {
     var arr = string.split('')
-    for(var i = 0; i < arr.length; i++){
+    for (var i = 0; i < arr.length; i++) {
         arr[i] = arr[i].charCodeAt(0)
     }
     return JSON.stringify(arr)

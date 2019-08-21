@@ -105,11 +105,21 @@ change ("/fact")
 test("Fact")
 
 change ("/who made lufbot?")
-expect("Who", "made lufbot")
+expect("Who", "made me")
 change("/who killed mine?")
 expect("Who", "yours")
 change("/who killed your dog?")
 expect("Who", "my")
+change("/who killed you?")
+expect("Who", "me")
+change("/who did you kill?")
+expect("Who", "i did")
+change("/who can beat you?")
+expect("Who", "beat me")
+change("/who do you like?")
+expect("Who", "i do")
+change("/who can I count on?")
+expect("Who", "you can")
 
 change ("/navy")
 expect("NAVY", "what the fuck")
@@ -223,7 +233,6 @@ change("/remember the last message?")
 expect("Remember", "/remember me?")
 change("/remember all the good times?")
 expect("Remember", "/remember me?")
-
 
 
 

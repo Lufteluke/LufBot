@@ -115,7 +115,9 @@ function borkConstructor() {
 
 module.exports.names = ['lufbot', 'bot']
 
-module.exports.wordSwaps = [["yours", "mine"],["your", "my"],["you", "me"]]
+module.exports.pronouns = ["i", "you", "he", "she", "it", "we", "you", "they"]
+
+module.exports.modalVerbs = ["can", "could", 'may', "might", "can't", "mustn't", "must", "shall",  "should", "would", "do", "did",  "will", "has", "have", "dare"]
 
 module.exports.subjects = [
     //Conspiracy
