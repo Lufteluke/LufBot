@@ -145,13 +145,12 @@ function parser (message) {
 
   //QUESTION
   function question() {
-
-    if (h.matchWordFromList(clean, l.yesNoWords)) {
-      return h.pickRandom(l.eightball)
+    if (h.matchWord(clean, 'who')) {
+      return r.who(clean, first_name);
     }
 
-    else if (h.matchWord(clean, 'who')) {
-      return r.who(clean, first_name);
+    else if (h.matchWordFromList(clean, l.yesNoWords)) {
+      return h.pickRandom(l.eightball)
     }
 
     else if (h.substringMatchInOrder(clean, ['chat', 'id'])) {

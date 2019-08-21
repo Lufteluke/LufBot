@@ -118,7 +118,7 @@ change("/who can beat you?")
 expect("Who", "beat me")
 change("/who do you like?")
 expect("Who", "i do")
-change("/who can I count on?")
+change("who can I count on?")
 expect("Who", "you can")
 
 change ("/navy")

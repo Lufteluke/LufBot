@@ -65,7 +65,7 @@ module.exports.who = function (clean, from) {
     }
 
     return (h.matchWord('who') ?
-        clean.replace('who', doer) :
+        h.replaceWord(clean, 'who', doer) :
         doer + clean
     )
 }
