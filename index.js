@@ -1,3 +1,5 @@
+//This script will start the app, send messages to the analyser and reply back to the user
+
 //Imports
 const axios = require('axios')
 var express = require('express')
@@ -5,12 +7,21 @@ var bodyParser = require('body-parser')
 var sentenceAnalyser = require('./sentenceAnalyser')
 
 var app = express()
-var port = process.env.PORT || 1337;
+
+/*
+The port is set by the environment, and won't work on virtual machines (Azure) if you don't do that.
+It can be set manually here if you know what you want.
+*/
+var port = process.env.PORT || 1337
+
+/* The API key is set in the environment, this can be hardcoded here, 
+but then it shouldn't be put on an open git repo
+*/
 const telegramApiKey = process.env.TELEGRAM_API_KEY || 'bot123456789:ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const apiUrl = 'https://api.telegram.org/bot' + telegramApiKey
 
 
-
+//I'll be honest, I'm not sure how this part works. Hooks up the bodyparser to the app, I guess.
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
@@ -19,13 +30,12 @@ app.use(
 )
 
 
-
-//GET!
+//GET! This is where new messages come from
 app.post('/new-message', function(req, res) {
   const {message} = req.body
 
   if (!message || !message.text) {
-    console.log('Empty msg!')
+    h.warn('Empty msg!')
     return res.end()
   }
  
@@ -34,8 +44,7 @@ app.post('/new-message', function(req, res) {
 })
 
 
-
-//POST!
+//POST! This is where messages are sent back to Telegram
 function postString (reply, message, res) {
   axios
   .post(
@@ -51,17 +60,14 @@ function postString (reply, message, res) {
   })
 
   .catch(err => {
-    console.log('Error: ' + err)
+    h.err('Error: ' + err)
     res.end('Error: ' + err)
   })
 }
 
-const l = require('./wordLists')
 const h = require('./helpers')
-const r = require('./replies')
-const c = require('./commands')
 
 //START!
 app.listen(port, function() {
-  console.log('LufBot listening on port ' + port)
+  h.info('LufBot listening on port ' + port)
 })

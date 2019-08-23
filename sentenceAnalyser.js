@@ -1,11 +1,23 @@
+/*
+Takes the message and strips various parts down. 
+It detects if any of the command are present and triggers on certain strings. 
+Depending on the command or text recognised, it may forward the message to replies 
+or directly to the more complex scripts. 
+It returns the result back to index which sends it to the user.
+*/
+
 const l = require('./wordLists')
 const h = require('./helpers')
 const r = require('./replies')
 const c = require('./commands')
+const b = require('./brainfuck')
+const p = require('./piglatin')
+const m = require('./memory')
 
 //Finishing touches on string
 module.exports.parse = function (message) {
   
+  // this is basically the whole reply
   var returnVar = parser(message)
   
   //empty string catch
@@ -15,17 +27,17 @@ module.exports.parse = function (message) {
 
   else {
     //borkify
-    if (h.matchWordFromList(message.text.toLowerCase(), c.bork)){
+    if (h.matchWordFromList(message.text, c.bork)){
       returnVar = r.bork(returnVar.toLowerCase(), 5)
     }
 
     //owoify
-    if (h.matchWordFromList(message.text.toLowerCase(), c.owo)){
+    if (h.matchWordFromList(message.text, c.owo)){
       returnVar = r.owo(returnVar.toLowerCase())
     }
 
     //norskify
-    if (h.matchWordFromList(message.text.toLowerCase(), c.lufReplace)){
+    if (h.matchWordFromList(message.text, c.lufReplace)){
       returnVar = r.lufReplace(returnVar.toLowerCase())
     }
   }
@@ -33,18 +45,23 @@ module.exports.parse = function (message) {
   return h.capitaliseFirst(returnVar)
 }
 
+//parse message to find which reply function to use
 function parser (message) {
   const {first_name} = message.from
   const {text} = message
 
   var clean = text.toLowerCase()
   const split  = clean.split(' ')
-  const commandWithName = split[0].toLowerCase()
+  const commandWithName = split[0]
   const command = commandWithName.split('@')[0] //because it might be /command@lufbot
+
+  m.logIfSaved(message)
   
-  if ((command !== null) && h.matchWordFromList(command, c.commands.concat('/yiff'))) {
+  //if command is in list
+  if ((command !== null) && h.matchWordFromListWithSymbols(command, c.commands.concat(c.secretCommands), true)) {
     clean = clean.replace(commandWithName, '') //we don't want the name
     
+    //find actual command
     console.log('Command: ' + command)
     
     switch (command) {
@@ -88,9 +105,34 @@ function parser (message) {
       return r.lufReplace(clean);
 
       case '/brainfuck':
-      return r.brainfuck(clean);
+      return b.brainfuck(clean);
+
+      case '/brainfuckencode':
+      return b.encode(clean)
+
+      case '/echo':
+      return r.echoMsg(message)
+
+      case '/latin':
+      return p.encode(clean)
+
+      case '/latindecode':
+      return p.decode(clean)
+
+      case '/remember':
+      return m.remember(message)
+
+      case '/forget':
+      return m.forget(message)
+
+      case '/shrug':
+      return "¯\\_(ツ)_/¯"
+
+      case '/secrets':
+      return r.secrets()
 
       default:
+      h.err("Command unknown: " + command)
       return "I don't know the command: " + command + ", but I should";
     }
   }
@@ -103,16 +145,15 @@ function parser (message) {
 
   //QUESTION
   function question() {
-
-    if (h.matchWordFromList(clean, l.yesNoWords)) {
-      return h.pickRandom(l.eightball)
-    }
-
-    else if (h.matchWord(clean, 'who')) {
+    if (h.matchWord(clean, 'who')) {
       return r.who(clean, first_name);
     }
 
-    else if (h.msgMatchInOrder(clean, ['chat', 'id'])) {
+    else if (h.matchWordFromList(clean, l.yesNoWords)) {
+      return h.pickRandom(l.eightball)
+    }
+
+    else if (h.substringMatchInOrder(clean, ['chat', 'id'])) {
       return 'Our lovely chat has the ID: ' + message.chat.id
     }
     else {
@@ -125,17 +166,17 @@ function parser (message) {
 
   function noCommand() {
     //QUESTION
-    if (h.msgMatch(clean, '?')) {
+    if (h.substringMatch(clean, '?')) {
       return question()
     }
 
     //ACTION
-    if (h.msgMatchInOrder(clean, c.action)) {
+    if (h.substringMatchInOrder(clean, c.action)) {
       return r.asteriskAction(clean, first_name)
     }
 
     //BEEP
-    if (h.msgMatchAny(clean, c.beep)){
+    if (h.substringMatchAny(clean, c.beep)){
       return r.beep(clean)
     }
 
@@ -145,7 +186,7 @@ function parser (message) {
     }
 
     //FACT
-    if (h.msgMatchAny(clean, c.fact)){
+    if (h.substringMatchAny(clean, c.fact)){
       return r.fact(first_name)
     }
 
@@ -154,36 +195,36 @@ function parser (message) {
 
 
 
-    if (h.msgMatch(clean, 'who')) {
-      if (h.msgMatch(clean, 'there')){
+    if (h.substringMatch(clean, 'who')) {
+      if (h.substringMatch(clean, 'there')){
         return 'Ball!'
       }
-      else if (h.msgMatch(clean, 'ball')){
+      else if (h.substringMatch(clean, 'ball')){
         return 'BallIEVE it or not, I’m walking on air!'
       }
     }
   
-    else if (h.msgMatch(clean, 'good wisdom')) {
+    else if (h.substringMatch(clean, 'good wisdom')) {
       return 'Thanks, I also know a few knock knock jokes'
     }
   
-    else if (h.msgMatch(clean, 'love')) {
+    else if (h.substringMatch(clean, 'love')) {
       return 'I love ' + first_name + '! ...on the inside anyway'
     }
   
-    else if (h.msgMatch(clean, 'good bot')) {
+    else if (h.substringMatch(clean, 'good bot')) {
       return 'Likewise, ' + first_name + ' you\'d make an excellent automaton'
     }
   
-    else if (h.msgMatch(clean, 'knock knock')) {
+    else if (h.substringMatch(clean, 'knock knock')) {
       return 'Who\' there?'
     }
   
-    else if (h.msgMatch(clean, 'who dares')) {
+    else if (h.substringMatch(clean, 'who dares')) {
       return 'It\'s me, the ' + first_name + '. I dispense wisdom from my mighty wisdom stack'
     }
   
-    else if (h.msgMatch(clean, 'wisdom')) {
+    else if (h.substringMatch(clean, 'wisdom')) {
       return 'Here is my wisdom: If a script is too large for your server, it\'s not yours'
     }
 
