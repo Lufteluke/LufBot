@@ -33,7 +33,7 @@ module.exports.default = function (from) {
 
 module.exports.who = function (clean, from) {
     const doer = h.pickRandom(l.subjects.concat(from))
-    var replace = [["lufbot", "me"], ["?", "!"]]
+    var replace = [["lufbot", "me"], ["?", "!"]]//fix
     var wordSwaps = [["yours", "mine"], ["your", "my"], ["you", "i"]]
 
     var split = clean.split(' ')

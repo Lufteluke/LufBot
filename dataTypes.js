@@ -50,11 +50,19 @@ module.exports.From = function () {
     this.language_code = "en"
 }
 
+
 module.exports.Chat = function () {
-    this.id = -100000000
-    this.title = "TestGrounds"
-    this.type = "group",
-    this.all_members_are_administrators = false
+    this.id = -100000000 //<52 bit int
+    this.title = "TestGrounds" //String. Optional. Title, for supergroups, channels and group chats
+    this.type = "supergroup" //String. private, group, supergroup or channel
+    this.first_name = null //String. Private only, first name of the other party
+    this.last_name = null //String. Private only, last name
+    this.photo = null //ChatPhoto. Optional, getChat only
+    this.description = null //String. Groups/channels only, getChat only
+    this.invite_link = null //String. Groups/channels only, exportChatInviteLink > getChat only
+    this.pinned_message = null //Message. groups/channels only
+    this.permissions = false //ChatPermissions. Groups/channels only, get chatOnly
+    this.sticker_set_name = null //
 }
 
 module.exports.Entity = function () {
