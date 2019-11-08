@@ -6,7 +6,7 @@ var sentenceAnalyser = require('./sentenceAnalyser')
 
 var app = express()
 var port = process.env.PORT || 1337;
-const telegramApiKey = process.env.TELEGRAM_API_KEY || 'bot123456789:ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const telegramApiKey = process.env.TELEGRAM_API_KEY || '123456789:ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const apiUrl = 'https://api.telegram.org/bot' + telegramApiKey
 
 
@@ -21,7 +21,7 @@ app.use(
 
 
 //GET!
-app.post('/new-message', function(req, res) {
+app.post('/' + telegramApiKey, function(req, res) {
   const {message} = req.body
 
   if (!message || !message.text) {
