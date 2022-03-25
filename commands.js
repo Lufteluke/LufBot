@@ -2,7 +2,7 @@
 
 //The main commands, will be listed with /help
 module.exports.commands = ['/talk', '/owo', '/eight', '/music', '/conspiracy', '/fact', '/help', '/about', 
-'/who', '/navy', '/bork', '/norsk', '/brainfuck', '/brainfuckencode', '/echo', '/latin', '/latindecode', '/remember', '/forget']
+'/who', '/navy', '/bork', '/norsk', '/brainfuck', '/brainfuckencode', '/echo', '/latin', '/latindecode', '/remember', '/forget', '/sarcasm']
 
 //Won't be shown with /help
 module.exports.secretCommands = ['/yiff', '/shrug', '/secrets']

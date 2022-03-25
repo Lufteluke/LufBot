@@ -131,6 +131,9 @@ function parser (message) {
       case '/secrets':
       return r.secrets()
 
+      case '/sarcasm':
+      return r.sarcasm(clean);
+
       default:
       h.err("Command unknown: " + command)
       return "I don't know the command: " + command + ", but I should";

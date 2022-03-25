@@ -26,6 +26,14 @@ module.exports.owo = function (clean) {
     return h.replace(h.replaceList(clean, ['l', 'r'], 'w'), 'u', 'oo')
 }
 
+module.exports.sarcasm = function(input) {
+    let split = input.split('');
+    for (let i = 0; i < split.length; i++) {
+        if(i % 2 == 1) split[i] = split[i].toUpperCase();
+    }
+    return split.join('');
+}
+
 module.exports.default = function (from) {
     h.warn("Default response")
     return h.pickRandom(l.iDontUnderstand) + '. ' + h.pickRandom(l.doMe) + ', ' + from
@@ -33,7 +41,7 @@ module.exports.default = function (from) {
 
 module.exports.who = function (clean, from) {
     const doer = h.pickRandom(l.subjects.concat(from))
-    var replace = [["lufbot", "me"], ["?", "!"]]//fix
+    var replace = [["lufbot", "me"], ["?", "!"]]
     var wordSwaps = [["yours", "mine"], ["your", "my"], ["you", "i"]]
 
     var split = clean.split(' ')

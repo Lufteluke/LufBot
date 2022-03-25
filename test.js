@@ -234,6 +234,9 @@ expect("Remember", "/remember me?")
 change("/remember all the good times?")
 expect("Remember", "/remember me?")
 
+change("/sarcasm this is dumb")
+expect("Sarcasm", "ThIs iS DuMb")
+
 
 
 //Always leave at the bottom
